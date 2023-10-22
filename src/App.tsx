@@ -1,14 +1,27 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { GithubPermalink } from './GithubPermalink/GithubPermalink';
+
+import "./GithubPermalink/github-permalink.css";
+import "./app.css";
+
+
+const links = [{
+  link: "https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"
+},
+{
+  link: "https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.js#L5-L23"
+},
+{
+  link: "https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.sql#L5-L21"
+}
+]
 
 function App() {
   return (
     <div className="App">
-      <GithubPermalink permalink='https://github.com/dwjohnston/blacksheepcode/blob/b9b4a4abef9a429cb27a4ba084da7f0ccc105f7d/app/routes/posts.tsx#L5-L13'/>
-      <GithubPermalink permalink='https://github.com/dwjohnston/my-private-repo/blob/a053a5e05eb3793b7e217af0facbd2b336517cb9/file.md#L1-L2'/>
-
+      
+      {links.map((v) => <GithubPermalink permalink={v.link}/>)}
     </div>
   );
 }

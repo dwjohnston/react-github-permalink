@@ -1,0 +1,50 @@
+.react-github-permalink {
+    border: solid 1px red; 
+    border-color: rgb(208, 215, 222); 
+    margin: 0.5em;
+    font-size: 12px;
+    border-radius: 4px;   
+
+}
+
+
+.react-github-permalink, .react-github-permalink .header {
+    border-color: rgb(208, 215, 222); 
+    border-style: solid; 
+    border-width: 1px; 
+}
+
+.react-github-permalink .header {
+    border-width: 0 0 1px 0; 
+}
+
+
+.react-github-permalink a.file-link {
+    color: rgb(9, 105, 218); 
+    font-weight: bold;
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.react-github-permalink a.commit-link {
+    color: rgb(31, 35, 40); 
+    text-decoration: underline;
+}
+
+
+
+.react-github-permalink .header p {
+    color: rgb(101, 109, 118);
+}
+
+
+.react-github-permalink .header {
+    background-color: rgb(246, 248, 250);
+    padding: 8px; 
+
+}
+
+.react-github-permalink .error {
+    font-weight: bold; 
+    color: red; 
+    margin-left: 1em;
+}
