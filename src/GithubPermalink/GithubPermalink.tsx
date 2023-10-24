@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
-import { githubGist, atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { githubGist } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 // Thanks ChatGPT
 type GitHubURLInfo = {
@@ -72,21 +72,10 @@ function handleResponse(response: Response): GithubDataResponse {
 async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> {
   const config = parseGitHubURL(permalink);
 
-  const token = process.env.REACT_APP_UNSAFE_GITHUB_TOKEN;
-  const headers = token ? {
-    "Authorization": `Bearer ${token}`
-  } : undefined;
-
-  const contentPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.commit}`, {
-    headers
-  });
-
-  const commitPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/commits/${config.commit}`, {
-    headers
-  });
+  const contentPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.commit}`);
+  const commitPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/commits/${config.commit}`);
 
   const [contentResult, commitResult] = await Promise.all([contentPromise, commitPromise]);
-
 
   if (!contentResult.ok) {
     return handleResponse(contentResult);
@@ -97,7 +86,6 @@ async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> 
   }
 
   const [contentJson, commitJson] = await Promise.all([contentResult.json(), commitResult.json()]);
-
   const content = atob(contentJson.content);
   const lines = content.split("\n");
 
@@ -112,9 +100,6 @@ async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> 
     commitUrl: commitJson.html_url,
     status: "ok"
   }
-
-
-
 }
 
 const GithubPermalinkContext = createContext({
@@ -132,7 +117,7 @@ type GithubPermalinkProps = {
 }; 
 export function GithubPermalink(props: GithubPermalinkProps ) {
 
-  const { permalink, className = '' } = props;
+  const { permalink } = props;
   const [data, setData] = useState(null as null | GithubDataResponse)
   const { getDataFn } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
