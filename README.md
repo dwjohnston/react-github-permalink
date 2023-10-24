@@ -36,9 +36,9 @@ import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink'
 import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
-    return <GithubPermalinkContext.Provider getDataFn={(permalink: string) => {
+    return <GithubPermalinkContext.Provider value={{getDataFn : (permalink: string) => {
         // Your implementation here
-    }}>  
+    }}}>  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
     </GithubPermalinkContext.Provider>
 }    

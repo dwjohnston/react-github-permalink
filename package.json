@@ -2,7 +2,7 @@
   "name": "react-github-permalink",
   "main": "dist/GithubPermalink.js",
   "files": ["dist"],
-  "version": "0.1.4",
+  "version": "1.0.0",
   "dependencies": {
     "react-syntax-highlighter": "^15.5.0"
   },
