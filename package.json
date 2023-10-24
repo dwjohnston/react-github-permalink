@@ -2,9 +2,13 @@
   "name": "react-github-permalink",
   "main": "dist/GithubPermalink.js",
   "files": ["dist"],
-  "version": "0.1.2",
+  "version": "0.1.4",
   "dependencies": {
     "react-syntax-highlighter": "^15.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwjohnston/react-github-permalink.git"
   },
   "scripts": {
     "start": "react-scripts start",

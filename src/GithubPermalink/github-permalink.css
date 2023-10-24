@@ -18,13 +18,13 @@
 
 .react-github-permalink .header {
     border-width: 0 0 1px 0; 
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
 
 .react-github-permalink a.file-link {
     color: rgb(9, 105, 218); 
     font-weight: bold;
-    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 .react-github-permalink a.commit-link {
