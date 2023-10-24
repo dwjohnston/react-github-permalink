@@ -2,11 +2,11 @@
 
 A simple React component that given a Github permalink, shows the code block. 
 
-(image)
+![screenshot of the tool in action](./screenshot.png)
 
 ## Demo
 
-
+https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
 
 ## Usage
 
@@ -19,7 +19,7 @@ export function MyApp() {
 }
 ```
 
-I also highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.visualstudio.com/items?itemName=hogashi.vscode-copy-github-permalink) which makes for ease in generating the permalinks. 
+I also highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.visualstudio.com/items?itemName=hogashi.vscode-copy-github-permalink) which makes for ease in generating the permalinks from within VSCode.
 
 ## Rate Limits and Authentication
 

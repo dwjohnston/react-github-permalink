@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import { GithubPermalink } from './GithubPermalink/GithubPermalink';
 
 import "./GithubPermalink/github-permalink.css";
-import "./app.css";
+import "./App.css";
 
 
 const links = [{

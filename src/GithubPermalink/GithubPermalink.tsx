@@ -102,9 +102,11 @@ async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> 
   }
 }
 
-const GithubPermalinkContext = createContext({
+export const GithubPermalinkContext = createContext({
   getDataFn: defaultGetDataFn,
 });
+
+
 
 
 function exhaustiveFailure(value: never): never {
