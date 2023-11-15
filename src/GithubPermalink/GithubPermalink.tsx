@@ -69,11 +69,16 @@ function handleResponse(response: Response): GithubDataResponse {
 
 }
 
-async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> {
+async function defaultGetDataFn(permalink: string, githubToken?: string): Promise<GithubDataResponse> {
   const config = parseGitHubURL(permalink);
 
-  const contentPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.commit}`);
-  const commitPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/commits/${config.commit}`);
+
+  const options = githubToken ?  {headers: {
+    Authorization: `Bearer ${githubToken}`
+  }} : undefined; 
+
+  const contentPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.commit}`, options);
+  const commitPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/commits/${config.commit}`, options);
 
   const [contentResult, commitResult] = await Promise.all([contentPromise, commitPromise]);
 
@@ -102,9 +107,21 @@ async function defaultGetDataFn(permalink: string): Promise<GithubDataResponse> 
   }
 }
 
-export const GithubPermalinkContext = createContext({
+export const GithubPermalinkContext = createContext<{getDataFn: typeof defaultGetDataFn, githubToken?: string } >({
   getDataFn: defaultGetDataFn,
 });
+
+export function GithubPermalinkProvider(props: PropsWithChildren<{
+  getDataFn?: typeof defaultGetDataFn, 
+  githubToken?: string 
+}>) {
+  return <GithubPermalinkContext.Provider value={{
+    getDataFn: props.getDataFn ?? defaultGetDataFn, 
+    githubToken: props.githubToken
+  }}>
+    {props.children}
+  </GithubPermalinkContext.Provider>
+}
 
 
 
@@ -121,11 +138,11 @@ export function GithubPermalink(props: GithubPermalinkProps ) {
 
   const { permalink } = props;
   const [data, setData] = useState(null as null | GithubDataResponse)
-  const { getDataFn } = useContext(GithubPermalinkContext);
+  const { getDataFn, githubToken } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getDataFn(permalink).then((v) => {
+    getDataFn(permalink, githubToken).then((v) => {
       setIsLoading(false);
       setData(v);
     })

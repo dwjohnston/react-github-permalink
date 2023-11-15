@@ -31,16 +31,37 @@ If you need to avoid rate limits or allow users to view private repos, you can i
 
 You can provide your own data fetching function via a context provider. 
 
+### Custom Data Function
+
 ```jsx
 import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
-    return <GithubPermalinkContext.Provider value={{getDataFn : (permalink: string) => {
+    return <GithubPermalinkProvider getDataFn ={(permalink: string) => {
         // Your implementation here
-    }}}>  
+    }}>  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
-    </GithubPermalinkContext.Provider>
+    </GithubPermalinkProvider>
 }    
 ```
 
+### Using a github token 
+
+In development you may find yourself hitting the API rate limit rather quickly, and this can be pain. 
+
+You can provide a Github token to avoid this. 
+
+***Do not use your private tokens in production, they will be public for the world to see!**
+
+```jsx
+import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css";
+
+export function MyApp() {
+    return <GithubPermalinkProvider githubToken={process.env.NODE_ENV='development' && process.env.MY_GITHUB_TOKEN}>  
+        <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
+    </GithubPermalinkProvider>
+}    
+
+```
