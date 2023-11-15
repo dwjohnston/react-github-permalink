@@ -2,7 +2,7 @@
   "name": "react-github-permalink",
   "main": "dist/GithubPermalink.js",
   "files": ["dist"],
-  "version": "1.1.0",
+  "version": "1.1.2",
   "dependencies": {
     "react-syntax-highlighter": "^15.5.0"
   },
@@ -16,7 +16,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build", 
+    "prepublishOnly": "yarn build"
   },
   "eslintConfig": {
     "extends": [
