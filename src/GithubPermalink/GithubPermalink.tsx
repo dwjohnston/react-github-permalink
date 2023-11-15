@@ -95,7 +95,7 @@ async function defaultGetDataFn(permalink: string, githubToken?: string): Promis
   const lines = content.split("\n");
 
   return {
-    lines: lines.slice(config.lineFrom - 1, config.lineTo - config.lineFrom),
+    lines: lines.slice(config.lineFrom - 1, config.lineTo),
     lineFrom: config.lineFrom,
     lineTo: config.lineTo,
     commit: config.commit,
