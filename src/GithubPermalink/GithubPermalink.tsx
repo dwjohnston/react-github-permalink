@@ -1,134 +1,8 @@
-import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
+import { PropsWithChildren,  useContext, useEffect, useState } from "react";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-
-// Thanks ChatGPT
-type GitHubURLInfo = {
-  owner: string;
-  repo: string;
-  commit: string;
-  path: string;
-  lineFrom: number;
-  lineTo: number;
-};
-
-function parseGitHubURL(githubURL: string): GitHubURLInfo {
-  // Define a regular expression to extract information from the URL
-  const regex = /https:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)#L(\d+)-L(\d+)/;
-
-  // Use the regular expression to extract the information
-  const match = githubURL.match(regex);
-
-  // Check if the URL matches the expected format
-  if (match) {
-    const [, owner, repo, commit, path, lineFrom, lineTo] = match;
-
-    // Create and return the object
-    return {
-      owner,
-      repo,
-      commit,
-      path,
-      lineFrom: parseInt(lineFrom, 10),
-      lineTo: parseInt(lineTo, 10),
-    };
-  } else {
-    throw new Error("Invalid config apparently");
-
-  }
-}
-
-type GithubDataResponse = (GitHubURLInfo & {
-  lines: Array<string>;
-  commitUrl: string;
-  status: "ok"
-}) | {
-  status: "rate-limit"
-} | {
-  status: "404"
-} | {
-  status: "other-error"
-}
-
-
-function handleResponse(response: Response): GithubDataResponse {
-
-  if (response.status === 404) {
-    return { status: "404" }
-  }
-
-  if (response.status === 403 && response.headers.get("X-Ratelimit-Remaining") === "0") {
-    return {
-      status: "rate-limit"
-    }
-  }
-
-  return {
-    status: "other-error"
-  }
-
-}
-
-async function defaultGetDataFn(permalink: string, githubToken?: string): Promise<GithubDataResponse> {
-  const config = parseGitHubURL(permalink);
-
-
-  const options = githubToken ?  {headers: {
-    Authorization: `Bearer ${githubToken}`
-  }} : undefined; 
-
-  const contentPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?ref=${config.commit}`, options);
-  const commitPromise = fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/commits/${config.commit}`, options);
-
-  const [contentResult, commitResult] = await Promise.all([contentPromise, commitPromise]);
-
-  if (!contentResult.ok) {
-    return handleResponse(contentResult);
-  }
-
-  if (!commitResult.ok) {
-    return handleResponse(commitResult);
-  }
-
-  const [contentJson, commitJson] = await Promise.all([contentResult.json(), commitResult.json()]);
-  const content = atob(contentJson.content);
-  const lines = content.split("\n");
-
-  return {
-    lines: lines.slice(config.lineFrom - 1, config.lineTo),
-    lineFrom: config.lineFrom,
-    lineTo: config.lineTo,
-    commit: config.commit,
-    path: config.path,
-    owner: config.owner,
-    repo: config.repo,
-    commitUrl: commitJson.html_url,
-    status: "ok"
-  }
-}
-
-export const GithubPermalinkContext = createContext<{getDataFn: typeof defaultGetDataFn, githubToken?: string } >({
-  getDataFn: defaultGetDataFn,
-});
-
-export function GithubPermalinkProvider(props: PropsWithChildren<{
-  getDataFn?: typeof defaultGetDataFn, 
-  githubToken?: string 
-}>) {
-  return <GithubPermalinkContext.Provider value={{
-    getDataFn: props.getDataFn ?? defaultGetDataFn, 
-    githubToken: props.githubToken
-  }}>
-    {props.children}
-  </GithubPermalinkContext.Provider>
-}
-
-
-
-
-function exhaustiveFailure(value: never): never {
-  throw new Error("Exhaustive failure."); 
-}
+import { GithubPermalinkDataResponse, GithubPermalinkContext } from "../GithubPermalinkContext";
+import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 
 type GithubPermalinkProps = {
   permalink: string;
@@ -137,7 +11,7 @@ type GithubPermalinkProps = {
 export function GithubPermalink(props: GithubPermalinkProps ) {
 
   const { permalink } = props;
-  const [data, setData] = useState(null as null | GithubDataResponse)
+  const [data, setData] = useState(null as null | GithubPermalinkDataResponse)
   const { getDataFn, githubToken } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -155,29 +29,6 @@ export function GithubPermalink(props: GithubPermalinkProps ) {
     throw new Error("Loading is complete, but no data was returned.")
   }
 
-  if(data.status === "404"){
-    return <GithubPermalinkInner {...props}>
-      <p className="error"> 
-       Github returned an HTTP status 404. Is this a private Github repo? 
-      </p>
-    </GithubPermalinkInner>
-  }
-
-  if(data.status ==="rate-limit"){
-    return <GithubPermalinkInner {...props}>
-      <p className="error"> 
-      You have encountered Github's unauthenticated API request rate limit. You can still visit the above link to see the code snippet.
-      </p>
-    </GithubPermalinkInner>
-  }
-
-  if(data.status ==="other-error"){
-    return <GithubPermalinkInner {...props}>
-      <p className="error"> 
-          An unknown error occurred.
-      </p>
-    </GithubPermalinkInner>
-  }
 
 
   if (data.status === "ok") {
@@ -190,8 +41,10 @@ export function GithubPermalink(props: GithubPermalinkProps ) {
     </GithubPermalinkInner>
 
   }
-  
-  return exhaustiveFailure(data);
+
+    return <GithubPermalinkInner {...props}>
+      <ErrorMessages data={data}/>
+    </GithubPermalinkInner>
 }
 
 

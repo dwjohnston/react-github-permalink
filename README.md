@@ -1,15 +1,15 @@
 # React Github Permalink
 
-A simple React component that given a Github permalink, shows the code block. 
+_Now with issue links!_ 
+
+## Github Permalink
+
+Given a Github permalink, show the code block. 
 
 ![screenshot of the tool in action](./screenshot.png)
 
-## Demo
 
-https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
-
-## Usage
-
+### Usage
 ```jsx
 import { GithubPermalink } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
@@ -20,6 +20,26 @@ export function MyApp() {
 ```
 
 I also highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.visualstudio.com/items?itemName=hogashi.vscode-copy-github-permalink) which makes for ease in generating the permalinks from within VSCode.
+
+## Github Issuelink
+
+
+![screenshot of the GithubIssueLink tool in action](./screenshot2.png)
+
+### Usage
+```jsx
+import { GithubPermalink } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />,
+}
+```
+
+
+## Demo
+
+https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
 
 ## Rate Limits and Authentication
 
@@ -52,7 +72,7 @@ In development you may find yourself hitting the API rate limit rather quickly, 
 
 You can provide a Github token to avoid this. 
 
-***Do not use your private tokens in production, they will be public for the world to see!**
+**Do not use your private tokens in production, they will be public for the world to see!**
 
 ```jsx
 import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink';
