@@ -21,6 +21,10 @@ export const Primary: Story = {
   render: () => <GithubPermalink permalink='https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5' />,
 };
 
+export const WithBackground: Story = {
+  render: () => <div style={{backgroundColor:"pink", padding: "1em"}}><GithubPermalink permalink='https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5' /></div>,
+};
+
 export const CustomDataFn: Story = {
   render: () => <GithubPermalinkProvider getDataFn={(permalink) => {
       return Promise.resolve({

@@ -21,6 +21,11 @@ export const Primary: Story = {
   render: () => <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />,
 };
 
+export const WithBackground: Story = {
+  render: () => <div style={{backgroundColor: "pink", padding: "1em"}}><GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' /></div>,
+};
+
+
 
 export const WithToken: Story = {
   render: () => <GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />,</GithubPermalinkProvider>,
