@@ -22,7 +22,7 @@
     "declaration": true
   },
   "include": [
-    "src/GithubPermalink/GithubPermalink.tsx"
+    "src/export.ts", 
   ], 
   
 }

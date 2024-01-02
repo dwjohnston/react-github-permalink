@@ -1,13 +1,67 @@
-.react-github-permalink {
-    border: solid 1px red; 
-    border-color: rgb(208, 215, 222); 
+
+.react-github-issuelink .header {
+    font-size: 16px;
+    color: rgb(31, 35, 40);
+    display: flex; 
+    flex-flow: row nowrap; 
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+
+.react-github-issuelink a {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.react-github-issuelink a:hover .react-github-issuelink-title, .react-github-issuelink a:hover .react-github-issuelink-number  {
+    text-decoration: underline;
+}
+
+
+.react-github-issuelink-number {
+    color: rgb(101, 109, 118);
+}
+
+.react-github-issuelink-status  {
+    color: white; 
+    fill: white;
+    font-size: 0.75em;
+    padding: 0 10px; 
+    border-radius: 2em; 
+    font-weight: 500;
+    line-height: 24px; 
+
+    display: flex; 
+    flex-flow: row nowrap; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 0.6em;
+
+}
+
+.react-github-issuelink-status.open {
+    background-color: rgb(31, 136, 61);
+}
+
+.react-github-issuelink-status.closed {
+    background-color: rgb(130, 80, 223);
+}
+
+.react-github-issuelink {
+    padding: 0.5em;
+}
+
+.react-github-permalink, .react-github-issuelink {
+    border: solid 1px rgb(208, 215, 222); 
     margin: 0.5em;
     font-size: 12px;
     border-radius: 4px;   
-
     text-align: left;
-
+    background-color: white;
 }
+
 
 
 .react-github-permalink, .react-github-permalink .header {
@@ -16,10 +70,12 @@
     border-width: 1px; 
 }
 
-.react-github-permalink .header {
+.react-github-permalink .header, .react-github-issuelink .header{
     border-width: 0 0 1px 0; 
     font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
+
+
 
 
 .react-github-permalink a.file-link {
@@ -46,7 +102,7 @@
 
 }
 
-.react-github-permalink .error {
+.react-github-permalink .error, .react-github-issuelink .error {
     font-weight: bold; 
     color: red; 
     margin-left: 1em;
