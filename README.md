@@ -59,8 +59,14 @@ import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
     return <GithubPermalinkProvider getDataFn ={(permalink: string) => {
-        // Your implementation here
-    }}>  
+            // Your implementation to retrieve permalinks here 
+        }}
+        getIssueFn={(issueLink: string) => {
+            // Your implementation to retrieve issue links here
+        }}
+
+    
+    >  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
     </GithubPermalinkProvider>
 }    
