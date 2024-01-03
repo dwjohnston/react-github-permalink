@@ -1,3 +1,9 @@
+## 1.3.0 
+
+Add repo information to GithubIssueLink. 
+
+Add Github SVG to GithubPermalink and GithubIssueLink
+
 ## 1.2.0 
 
 Adds GithubIssueLink. 

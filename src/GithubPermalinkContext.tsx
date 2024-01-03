@@ -29,6 +29,8 @@ export type GithubIssueLinkDataResponse = {
     issueTitle: string; 
     issueNumber: string; 
     issueState: "open" | "closed"; 
+    owner: string; 
+    repo: string; 
     status: "ok"
 } | ErrorResponses; 
 
@@ -114,7 +116,9 @@ async function defaultGetIssueFn(issueLink: string, githubToken?: string): Promi
         issueTitle: issueJson.title,
         issueNumber: config.issue,
         issueState: issueJson.state,
-        status: "ok"
+        status: "ok", 
+        owner: config.owner, 
+        repo: config.repo
     }
 }
 

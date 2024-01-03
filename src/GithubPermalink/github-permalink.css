@@ -1,5 +1,5 @@
 
-.react-github-issuelink .header {
+.react-github-issuelink .react-github-issuelink-body {
     font-size: 16px;
     color: rgb(31, 35, 40);
     display: flex; 
@@ -8,6 +8,9 @@
     align-items: center;
     text-decoration: none;
 }
+.react-github-issuelink-body p {
+    margin: 0;
+}
 
 .react-github-issuelink a {
     text-decoration: none;
@@ -15,13 +18,24 @@
 
 }
 
-.react-github-issuelink a:hover .react-github-issuelink-title, .react-github-issuelink a:hover .react-github-issuelink-number  {
+.react-github-issuelink a:hover .react-github-issuelink-title,
+ .react-github-issuelink a:hover .react-github-issuelink-number  {
     text-decoration: underline;
 }
 
 
 .react-github-issuelink-number {
     color: rgb(101, 109, 118);
+}
+
+.react-github-issuelink-repo {
+    font-size: 12px; 
+    font-weight: bold;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 0.75em;
+    text-decoration: underline;
 }
 
 .react-github-issuelink-status  {
@@ -68,6 +82,14 @@
     border-color: rgb(208, 215, 222); 
     border-style: solid; 
     border-width: 1px; 
+
+}
+
+.react-github-permalink .header {
+    display: flex; 
+    flex-flow: row nowrap;
+    gap: 0.75em;
+    align-items: center;
 }
 
 .react-github-permalink .header, .react-github-issuelink .header{
