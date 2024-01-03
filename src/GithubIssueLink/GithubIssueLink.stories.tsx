@@ -28,6 +28,6 @@ export const WithBackground: Story = {
 
 
 export const WithToken: Story = {
-  render: () => <GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />,</GithubPermalinkProvider>,
+  render: () => <GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' /></GithubPermalinkProvider>,
 
 }

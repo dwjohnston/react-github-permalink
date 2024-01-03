@@ -1,14 +1,15 @@
-import { PropsWithChildren,  useContext, useEffect, useState } from "react";
+import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { GithubPermalinkDataResponse, GithubPermalinkContext } from "../GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
+import { GithubSvg } from "../GithubSvg/GithubSvg";
 
 type GithubPermalinkProps = {
   permalink: string;
   className?: string;
-}; 
-export function GithubPermalink(props: GithubPermalinkProps ) {
+};
+export function GithubPermalink(props: GithubPermalinkProps) {
 
   const { permalink } = props;
   const [data, setData] = useState(null as null | GithubPermalinkDataResponse)
@@ -42,18 +43,24 @@ export function GithubPermalink(props: GithubPermalinkProps ) {
 
   }
 
-    return <GithubPermalinkInner {...props}>
-      <ErrorMessages data={data}/>
-    </GithubPermalinkInner>
+  return <GithubPermalinkInner {...props}>
+    <ErrorMessages data={data} />
+  </GithubPermalinkInner>
 }
 
 
 function GithubPermalinkInner(props: PropsWithChildren<{
   header?: React.ReactNode
-}  & GithubPermalinkProps>) {
+} & GithubPermalinkProps>) {
   return <div className={`react-github-permalink ${props.className}`}>
     <div className="header">
-      {props.header ??  <a href={props.permalink} className="file-link">{props.permalink}</a>}
+      <div>
+
+        <GithubSvg />
+      </div>
+      <div>
+        {props.header ?? <a href={props.permalink} className="file-link">{props.permalink}</a>}
+      </div>
     </div>
     {props.children}
   </div>
