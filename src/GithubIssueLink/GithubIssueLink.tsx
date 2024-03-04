@@ -1,8 +1,6 @@
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
-import ReactSyntaxHighlighter from "react-syntax-highlighter";
-import { githubGist } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-import { exhaustiveFailure } from "../utils/exhaustiveFailure";
-import { GithubPermalinkDataResponse, GithubPermalinkContext, GithubIssueLinkDataResponse } from "../GithubPermalinkContext";
+
+import {  GithubPermalinkContext, GithubIssueLinkDataResponse } from "../GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 import { GithubSvg } from "../GithubSvg/GithubSvg";
 
@@ -14,15 +12,15 @@ export function GithubIssueLink(props: GithubIssueLinkProps) {
 
   const { issueLink } = props;
   const [data, setData] = useState(null as null | GithubIssueLinkDataResponse)
-  const { getIssueFn, githubToken } = useContext(GithubPermalinkContext);
+  const { getIssueFn, githubToken, onError} = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getIssueFn(issueLink, githubToken).then((v) => {
+    getIssueFn(issueLink, githubToken, onError).then((v) => {
       setIsLoading(false);
       setData(v);
     })
-  }, [])
+  }, [getIssueFn, githubToken, issueLink, onError])
 
   if (isLoading) {
     return null;

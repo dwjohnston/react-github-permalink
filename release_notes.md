@@ -1,3 +1,7 @@
+## 1.4.0 
+
+Add `onError` error reporting option.
+
 ## 1.3.0 
 
 Add repo information to GithubIssueLink. 

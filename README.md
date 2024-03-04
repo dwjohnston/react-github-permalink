@@ -68,6 +68,7 @@ export function MyApp() {
     
     >  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
+        <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />
     </GithubPermalinkProvider>
 }    
 ```
@@ -90,4 +91,18 @@ export function MyApp() {
     </GithubPermalinkProvider>
 }    
 
+```
+
+### Error reporting 
+
+It might be helpful to know if users are encountering API errors, for example if they are being rate limited. 
+
+The `onError` property can allow you to report these errors to sentry for example. 
+
+```jsx
+<GithubPermalinkProvider onError={(err) => {
+    Sentry.captureException(err);
+}}>  
+
+    </GithubPermalinkProvider>
 ```

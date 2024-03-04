@@ -76,6 +76,8 @@ function parseGithubIssueLink(url: string): { owner: string, repo: string, issue
 
 function handleResponse(response: Response): ErrorResponses {
 
+    
+
     if (response.status === 404) {
         return { status: "404" }
     }
@@ -92,7 +94,7 @@ function handleResponse(response: Response): ErrorResponses {
 
 }
 
-async function defaultGetIssueFn(issueLink: string, githubToken?: string): Promise<GithubIssueLinkDataResponse> {
+async function defaultGetIssueFn(issueLink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubIssueLinkDataResponse> {
     const config = parseGithubIssueLink(issueLink);
 
 
@@ -107,7 +109,9 @@ async function defaultGetIssueFn(issueLink: string, githubToken?: string): Promi
 
 
     if (!issueResult.ok) {
+        onError?.(issueResult);
         return handleResponse(issueResult);
+
     }
 
     const issueJson = await issueResult.json();
@@ -124,7 +128,7 @@ async function defaultGetIssueFn(issueLink: string, githubToken?: string): Promi
 
 
 
-async function defaultGetPermalinkFn(permalink: string, githubToken?: string): Promise<GithubPermalinkDataResponse> {
+async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
     const config = parseGithubPermalinkUrl(permalink);
 
 
@@ -140,10 +144,12 @@ async function defaultGetPermalinkFn(permalink: string, githubToken?: string): P
     const [contentResult, commitResult] = await Promise.all([contentPromise, commitPromise]);
 
     if (!contentResult.ok) {
+        onError?.(contentResult);
         return handleResponse(contentResult);
     }
 
     if (!commitResult.ok) {
+        onError?.(commitResult);
         return handleResponse(commitResult);
     }
 
@@ -169,7 +175,9 @@ async function defaultGetPermalinkFn(permalink: string, githubToken?: string): P
 type GithubPermalinkContextType = {
     getDataFn: typeof defaultGetPermalinkFn,
     getIssueFn: typeof defaultGetIssueFn,
-    githubToken?: string }
+    githubToken?: string
+    onError?: (e: unknown) => void; 
+}
 
 
 export const GithubPermalinkContext = createContext<GithubPermalinkContextType>({
@@ -181,7 +189,8 @@ export function GithubPermalinkProvider(props: PropsWithChildren<Partial<GithubP
     return <GithubPermalinkContext.Provider value={{
         getDataFn: props.getDataFn ?? defaultGetPermalinkFn,
         getIssueFn: props.getIssueFn ?? defaultGetIssueFn,
-        githubToken: props.githubToken
+        githubToken: props.githubToken,
+        onError: props.onError,
     }}>
         {props.children}
     </GithubPermalinkContext.Provider>
