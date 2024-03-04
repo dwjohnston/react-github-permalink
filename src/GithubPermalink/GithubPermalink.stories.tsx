@@ -49,6 +49,15 @@ export const CustomDataFn: Story = {
   ,
 };
 
+export const ErrorReporting: Story = {
+  render: () => <GithubPermalinkProvider onError={(err) => console.error(err)}
+  >
+    <GithubPermalink permalink='https://github.com/djohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5' />
+   </GithubPermalinkProvider>
+  ,
+};
+
+
 
 export const WithToken: Story = {
   render: () => <GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubPermalink permalink='https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5' /></GithubPermalinkProvider>,
