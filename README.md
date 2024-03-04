@@ -92,3 +92,17 @@ export function MyApp() {
 }    
 
 ```
+
+### Error reporting 
+
+It might be helpful to know if users are encountering API errors, for example if they are being rate limited. 
+
+The `onError` property can allow you to report these errors to sentry for example. 
+
+```jsx
+<GithubPermalinkProvider onError={(err) => {
+    Sentry.captureException(err);
+}}>  
+
+    </GithubPermalinkProvider>
+```

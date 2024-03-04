@@ -13,15 +13,15 @@ export function GithubPermalink(props: GithubPermalinkProps) {
 
   const { permalink } = props;
   const [data, setData] = useState(null as null | GithubPermalinkDataResponse)
-  const { getDataFn, githubToken } = useContext(GithubPermalinkContext);
+  const { getDataFn, githubToken, onError } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getDataFn(permalink, githubToken).then((v) => {
+    getDataFn(permalink, githubToken, onError).then((v) => {
       setIsLoading(false);
       setData(v);
     })
-  }, [])
+  }, [getDataFn, githubToken, onError, permalink])
 
   if (isLoading) {
     return null;
