@@ -122,6 +122,26 @@
     background-color: rgb(246, 248, 250);
     padding: 8px; 
 
+    .link-wrapper {
+        min-width: 0; 
+        overflow: hidden;
+
+        a {
+
+            /* 
+                For issues re: ellipsis and flex see: 
+
+                https://stackoverflow.com/questions/16660506/use-text-overflow-ellipsis-on-an-anchor-tag
+                https://css-tricks.com/flexbox-truncated-text/
+
+            */
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: block; 
+
+        }
+    }
+
 }
 
 .react-github-permalink .error, .react-github-issuelink .error {

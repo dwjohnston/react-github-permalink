@@ -58,7 +58,7 @@ function GithubPermalinkInner(props: PropsWithChildren<{
 
         <GithubSvg />
       </div>
-      <div>
+      <div className="link-wrapper">
         {props.header ?? <a href={props.permalink} className="file-link">{props.permalink}</a>}
       </div>
     </div>
