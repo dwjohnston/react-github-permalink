@@ -35,7 +35,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
   if (data.status === "ok") {
     return <GithubPermalinkInner {...props} header={<>
       <a href={permalink} className="file-link">{`${data.owner}/${data.repo}/${data.path}`}</a>
-      <p>Lines {data.lineFrom} to {data.lineTo} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
+      <p>{data.lineFrom === data.lineTo? <>Line {data.lineFrom}</> : <>Lines {data.lineFrom} to {data.lineTo}</>} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
     </>}>
 
       <ReactSyntaxHighlighter style={githubGist} language="javascript" showLineNumbers startingLineNumber={data.lineFrom}>{data.lines.join("\n")}</ReactSyntaxHighlighter>
