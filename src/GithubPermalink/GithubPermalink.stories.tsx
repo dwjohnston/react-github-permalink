@@ -63,3 +63,9 @@ export const WithToken: Story = {
   render: () => <GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubPermalink permalink='https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5' /></GithubPermalinkProvider>,
 
 }
+
+
+export const LongPath: Story = {
+  render: () => <div style={{width: 410, color: "solid 1px red"}}><GithubPermalinkProvider githubToken={process.env.STORYBOOK_GITHUB_TOKEN}> <GithubPermalink permalink='https://github.com/dwjohnston/blacksheepcode/blob/24c6f3ef9d09f9e061226e19e78a4c8d1ee03710/app/routes/posts/adding_msw_bundler_to_remix_app_2.mdx#L1-L11' /></GithubPermalinkProvider></div>,
+
+}
