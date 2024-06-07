@@ -4,7 +4,7 @@
   "files": [
     "dist"
   ],
-  "version": "1.4.0",
+  "version": "1.4.1",
   "dependencies": {
     "react-syntax-highlighter": "^15.5.0"
   },
