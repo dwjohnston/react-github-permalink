@@ -1,9 +1,10 @@
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
-import { githubGist } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import {  github, tomorrowNight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { GithubPermalinkDataResponse, GithubPermalinkContext } from "../GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 import { GithubSvg } from "../GithubSvg/GithubSvg";
+import {useMediaQuery} from "react-responsive";
 
 type GithubPermalinkProps = {
   permalink: string;
@@ -23,12 +24,15 @@ export function GithubPermalink(props: GithubPermalinkProps) {
     })
   }, [getDataFn, githubToken, onError, permalink])
 
+  const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" }) 
+
   if (isLoading) {
     return null;
   }
   if (!data) {
     throw new Error("Loading is complete, but no data was returned.")
   }
+ 
 
 
 
@@ -38,7 +42,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
       <p>{data.lineFrom === data.lineTo? <>Line {data.lineFrom}</> : <>Lines {data.lineFrom} to {data.lineTo}</>} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
     </>}>
 
-      <ReactSyntaxHighlighter style={githubGist} language="javascript" showLineNumbers startingLineNumber={data.lineFrom}>{data.lines.join("\n")}</ReactSyntaxHighlighter>
+      <ReactSyntaxHighlighter style={isDarkMode ? tomorrowNight : github} language="javascript" showLineNumbers startingLineNumber={data.lineFrom}>{data.lines.join("\n")}</ReactSyntaxHighlighter>
     </GithubPermalinkInner>
 
   }
@@ -52,7 +56,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
 function GithubPermalinkInner(props: PropsWithChildren<{
   header?: React.ReactNode
 } & GithubPermalinkProps>) {
-  return <div className={`react-github-permalink ${props.className}`}>
+  return <div className={`rgp-base react-github-permalink ${props.className??''}`}>
     <div className="header">
       <div>
 

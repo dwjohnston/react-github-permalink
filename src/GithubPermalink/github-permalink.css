@@ -1,7 +1,64 @@
 
+
+.rgp-base {
+    --rgp-color-bg-stark: white; 
+    --rgp-color-text-stark: rgb(31, 35, 40);
+    
+    --rgp-color-bg-frame: rgb(246, 248, 250);
+    --rgp-color-text-frame: rgb(101, 109, 118);
+  
+    --rgp-color-border: rgb(208, 215, 222); 
+
+    --rgp-color-issuenumber: rgb(101, 109, 118);
+    --rgp-color-file-link: rgb(9, 105, 218); 
+    --rgp-color-commit-link: rgb(31, 35, 40);
+
+    --rgp-color-status-open: rgb(31, 136, 61);
+    --rgp-color-status-closed: rgb(130, 80, 223);
+    --rgp-color-status-error: red;
+
+
+    color: var(--rgp-color-text-stark);
+
+
+
+
+
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .rgp-base {
+
+    --rgp-color-bg-stark: rgb(29, 31, 33); 
+    --rgp-color-text-stark: rgb(230, 237, 243);
+
+    
+    --rgp-color-bg-frame: rgb(22, 27, 34);    
+    --rgp-color-text-frame: rgb(141, 150, 160);
+    
+    --rgp-color-border: rgb(48, 54, 61); 
+    
+    --rgp-color-issuenumber: rgb(101, 109, 118);
+    --rgp-color-file-link: rgb(68, 147, 248);
+    --rgp-color-commit-link: rgb(230, 237, 243);
+
+    --rgp-color-status-open: rgb(31, 136, 61);
+    --rgp-color-status-closed: rgb(130, 80, 223);
+    --rgp-color-status-error: red;
+
+    
+    }
+}
+
+svg.github-logo{
+    fill: var(--rgp-color-commit-link);
+}
+
 .react-github-issuelink .react-github-issuelink-body {
     font-size: 16px;
-    color: rgb(31, 35, 40);
+    color: var(--rgp-color-text-stark);
     display: flex; 
     flex-flow: row nowrap; 
     justify-content: space-between;
@@ -25,7 +82,7 @@
 
 
 .react-github-issuelink-number {
-    color: rgb(101, 109, 118);
+    color: var(--rgp-color-issuenumber);
 }
 
 .react-github-issuelink-repo {
@@ -39,8 +96,8 @@
 }
 
 .react-github-issuelink-status  {
-    color: white; 
-    fill: white;
+    color: var(--rgp-color-bg-stark); 
+    fill: var(--rgp-color-bg-stark);
     font-size: 0.75em;
     padding: 0 10px; 
     border-radius: 2em; 
@@ -56,11 +113,11 @@
 }
 
 .react-github-issuelink-status.open {
-    background-color: rgb(31, 136, 61);
+    background-color: var(--rgp-color-status-open);
 }
 
 .react-github-issuelink-status.closed {
-    background-color: rgb(130, 80, 223);
+    background-color: var(----rgp-color-status-closed);
 }
 
 .react-github-issuelink {
@@ -68,18 +125,18 @@
 }
 
 .react-github-permalink, .react-github-issuelink {
-    border: solid 1px rgb(208, 215, 222); 
+    border: solid 1px var(--rgp-color-border);
     margin: 0.5em;
     font-size: 12px;
     border-radius: 4px;   
     text-align: left;
-    background-color: white;
+    background-color: var(--rgp-color-bg-stark);
 }
 
 
 
 .react-github-permalink, .react-github-permalink .header {
-    border-color: rgb(208, 215, 222); 
+    border-color: var(--rgp-color-border);
     border-style: solid; 
     border-width: 1px; 
 
@@ -101,25 +158,25 @@
 
 
 .react-github-permalink a.file-link {
-    color: rgb(9, 105, 218); 
+    color: var(--rgp-color-file-link);
     font-weight: bold;
 }
 
 .react-github-permalink a.commit-link {
-    color: rgb(31, 35, 40); 
+    color:  var(--rgp-color-commit-link);
     text-decoration: underline;
 }
 
 
 
 .react-github-permalink .header p {
-    color: rgb(101, 109, 118);
+    color: var(--rgp-color-text-frame);
     margin: 0.25em 0;
 }
 
 
 .react-github-permalink .header {
-    background-color: rgb(246, 248, 250);
+    background-color: var(--rgp-color-bg-frame);
     padding: 8px; 
 
     .link-wrapper {
@@ -146,6 +203,6 @@
 
 .react-github-permalink .error, .react-github-issuelink .error {
     font-weight: bold; 
-    color: red; 
+    color: var(--rgp-color-status-error);
     margin-left: 1em;
 }

@@ -61,7 +61,7 @@ export function GithubIssueLink(props: GithubIssueLinkProps) {
 function GithubIssueLinkInner(props: PropsWithChildren<{
   header?: React.ReactNode
 } & GithubIssueLinkProps>) {
-  return <div className={`react-github-issuelink ${props.className}`}>
+  return <div className={`rgp-base react-github-issuelink ${props.className ?? ''} `}>
     <a href={props.issueLink}>
 
 
