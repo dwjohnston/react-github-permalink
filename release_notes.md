@@ -1,3 +1,13 @@
+# 1.5.0
+
+Adds dark mode for user preference
+
+# 1.4.1
+
+Fixes overflow style bug
+Fixes single line permalink error
+
+
 ## 1.4.0 
 
 Add `onError` error reporting option.
