@@ -1,3 +1,4 @@
+"use client"
 import { PropsWithChildren, createContext } from "react";
 import { parseGithubIssueLink, parseGithubPermalinkUrl } from "./utils/urlParsers";
 
