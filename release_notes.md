@@ -1,8 +1,12 @@
-# 1.5.0
+## 1.6.0 
+
+Makes Next14/RSC friendly - adds "use client" directives 
+
+## 1.5.0
 
 Adds dark mode for user preference
 
-# 1.4.1
+## 1.4.1
 
 Fixes overflow style bug
 Fixes single line permalink error
