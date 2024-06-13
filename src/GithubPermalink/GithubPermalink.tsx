@@ -1,3 +1,5 @@
+"use client"
+
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import {  github, tomorrowNight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';

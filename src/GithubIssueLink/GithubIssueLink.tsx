@@ -1,3 +1,5 @@
+"use client"
+
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import {  GithubPermalinkContext, GithubIssueLinkDataResponse } from "../GithubPermalinkContext";
