@@ -1,4 +1,4 @@
-import { GithubPermalinkUrlInfo } from "../GithubPermalinkContext";
+import { GithubPermalinkUrlInfo } from "../config/GithubPermalinkContext";
 
 export function parseGithubPermalinkUrl(githubURL: string): GithubPermalinkUrlInfo {
 // Define a regular expression to extract information from the URL

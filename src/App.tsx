@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import { GithubPermalink,  } from './GithubPermalink/GithubPermalink';
-import {GithubPermalinkProvider} from "./GithubPermalinkContext"; 
+import {GithubPermalinkProvider} from "./config/GithubPermalinkContext"; 
 
 import "./GithubPermalink/github-permalink.css";
 import "./App.css";
