@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 
-import {  GithubPermalinkContext, GithubIssueLinkDataResponse } from "../GithubPermalinkContext";
+import {  GithubPermalinkContext, GithubIssueLinkDataResponse } from "../config/GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 import { GithubSvg } from "../GithubSvg/GithubSvg";
 

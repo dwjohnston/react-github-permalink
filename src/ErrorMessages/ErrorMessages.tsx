@@ -1,4 +1,4 @@
-import { ErrorResponses } from "../GithubPermalinkContext";
+import { ErrorResponses } from "../config/GithubPermalinkContext";
 import { exhaustiveFailure } from "../utils/exhaustiveFailure";
 
 export function ErrorMessages(props: {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj  } from '@storybook/react';
 
 import { GithubIssueLink,} from './GithubIssueLink';
-import { GithubPermalinkContext, GithubPermalinkProvider} from "../GithubPermalinkContext";
+import { GithubPermalinkContext, GithubPermalinkProvider} from "../config/GithubPermalinkContext";
 import "../GithubPermalink/github-permalink.css"
 
 const meta: Meta<typeof GithubIssueLink> = {
