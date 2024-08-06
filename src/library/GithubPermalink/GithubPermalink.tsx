@@ -23,8 +23,6 @@ export function GithubPermalink(props: GithubPermalinkProps) {
     })
   }, [getDataFn, githubToken, onError, permalink])
 
-  const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
-
   if (isLoading) {
     return null;
   }
@@ -33,7 +31,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
   }
 
 
-  return <GithubPermalinkBase className={className} permalink={permalink} data={data} isDarkMode={isDarkMode} />
+  return <GithubPermalinkBase className={className} permalink={permalink} data={data}/>
 }
 
 

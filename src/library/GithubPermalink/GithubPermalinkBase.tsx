@@ -8,11 +8,10 @@ export type GithubPermalinkBaseProps = {
     className?: string;
     permalink: string;
     data: GithubPermalinkDataResponse;
-    isDarkMode: boolean;
 }
 export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
-    const { data, permalink, isDarkMode } = props;
+    const { data, permalink } = props;
 
     if (data.status === "ok") {
         return <GithubPermalinkInner {...props} header={<>
