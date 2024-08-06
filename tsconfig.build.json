@@ -22,7 +22,7 @@
     "declaration": true
   },
   "include": [
-    "src/export.ts", 
+    "src/library/export.ts", 
   ], 
   
 }

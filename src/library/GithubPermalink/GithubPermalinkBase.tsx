@@ -20,7 +20,7 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
             <p>{data.lineFrom === data.lineTo ? <>Line {data.lineFrom}</> : <>Lines {data.lineFrom} to {data.lineTo}</>} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
         </>}>
 
-            <SyntaxHighlight text={data.lines.join("\n")} isDarkMode={isDarkMode} startingLineNumber={data.lineFrom} />
+            <SyntaxHighlight text={data.lines.join("\n")} startingLineNumber={data.lineFrom} />
         </GithubPermalinkInner>
 
     }
