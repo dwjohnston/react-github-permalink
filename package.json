@@ -10,15 +10,12 @@
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/library/GithubPermalink/github-permalink.css dist",
     "test": "echo not implemented && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/library/GithubPermalink/github-permalink.css dist",
     "prepublishOnly": "npm run build"
   },
-
-
-
   "dependencies": {
     "react-responsive": "^10.0.0",
     "react-syntax-highlighter": "^15.5.0"
