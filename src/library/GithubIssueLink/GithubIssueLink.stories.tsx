@@ -22,7 +22,7 @@ type Story = StoryObj<typeof GithubIssueLink>;
  */
 export const Primary: Story = {
   render: () => (
-    <GithubIssueLink issueLink="https://github.com/dwjohnston/react-github-permalink/issues/2" />
+    <GithubIssueLink issueLink="https://github.com/dwjohnston/react-github-permalink/issues/12" />
   ),
 };
 

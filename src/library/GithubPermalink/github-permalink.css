@@ -13,9 +13,14 @@
     --rgp-color-file-link: rgb(9, 105, 218); 
     --rgp-color-commit-link: rgb(31, 35, 40);
 
+    --rgp-color-status-foreground: white; 
     --rgp-color-status-open: rgb(31, 136, 61);
     --rgp-color-status-closed: rgb(130, 80, 223);
     --rgp-color-status-error: red;
+
+
+    --rgp-color-reaction-foreground: #0969da; 
+    --rgp-color-reaction-background: #ddf4ff;
 
 
     color: var(--rgp-color-text-stark);
@@ -44,9 +49,13 @@
     --rgp-color-file-link: rgb(68, 147, 248);
     --rgp-color-commit-link: rgb(230, 237, 243);
 
-    --rgp-color-status-open: rgb(31, 136, 61);
+    --rgp-color-status-foreground: white; 
+    --rgp-color-status-open: #238636;
     --rgp-color-status-closed: rgb(130, 80, 223);
     --rgp-color-status-error: red;
+
+    --rgp-color-reaction-foreground: #4493f8; 
+    --rgp-color-reaction-background: #388bfd33;
 
     
     }
@@ -96,8 +105,8 @@ svg.github-logo{
 }
 
 .react-github-issuelink-status  {
-    color: var(--rgp-color-bg-stark); 
-    fill: var(--rgp-color-bg-stark);
+    color: var(--rgp-color-status-foreground); 
+    fill: var(--rgp-color-status-foreground); 
     font-size: 0.75em;
     padding: 0 10px; 
     border-radius: 2em; 
@@ -205,4 +214,23 @@ svg.github-logo{
     font-weight: bold; 
     color: var(--rgp-color-status-error);
     margin-left: 1em;
+}
+
+.reaction-bar {
+    font-size: 0.8em; 
+    margin-top: 0.5em;
+}
+
+.reaction-value {
+    color: var(--rgp-color-reaction-foreground); 
+    background-color: var(--rgp-color-reaction-background); 
+    border: solid 1px var(--rgp-color-reaction-foreground); 
+    border-radius: 100px;
+    display: inline-block;
+    margin-right: 0.75em;
+    padding: 0.25em;
+
+    span {
+        margin: 0 2px;
+    }
 }
