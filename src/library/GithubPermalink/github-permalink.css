@@ -117,7 +117,7 @@ svg.github-logo{
 }
 
 .react-github-issuelink-status.closed {
-    background-color: var(----rgp-color-status-closed);
+    background-color: var(--rgp-color-status-closed);
 }
 
 .react-github-issuelink {
