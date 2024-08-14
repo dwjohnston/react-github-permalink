@@ -23,6 +23,7 @@
   },
   "include": [
     "src/library/export.ts", 
+    "src/library/rsc.ts", 
   ], 
   
 }
