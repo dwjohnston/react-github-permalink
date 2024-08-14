@@ -11,6 +11,9 @@ export type GithubPermalinkBaseProps = {
 }
 export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
+
+    console.log(props);
+
     const { data, permalink } = props;
 
     if (data.status === "ok") {

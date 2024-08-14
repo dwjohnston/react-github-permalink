@@ -1,15 +1,37 @@
 # React Github Permalink
 
-_Now with issue links!_ 
+Display Github permalinks as codeblocks. 
 
-## Github Permalink
+Display Github issue links. 
 
-Given a Github permalink, show the code block. 
+![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
+![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
+![screenshot of the tool in action - light mode ](./screenshot-issuelink-dark.png)
+![screenshot of the tool in action - light mode ](./screenshot-issuelink-light.png)
 
-![screenshot of the tool in action](./screenshot.png)
 
 
-### Usage
+I highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.visualstudio.com/items?itemName=hogashi.vscode-copy-github-permalink) for ease in generating the permalinks from within VSCode.
+
+## Demo
+
+https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
+
+
+## RSC Compatibility / Three modes of operation
+
+This package is compatible with Next 13+ and the components can be used as RSCs if you wish. 
+
+Three variants of each component are exported
+
+ - GithubPermalink/GithubIssueLink - Client component - It fetches the data as on the client in a useEffect. ie. Data won't be retrieved until application has loaded in user's browser.   
+ - GithubPermalinkBase/GithubIssueLinkBase - this is the base component - it does no data fetching on its own. 
+ - GithubPermalinkRsc/GithubIssueLinkRsc - This is an RSC. 
+
+
+
+
+### Basic usage (Client component) 
 ```jsx
 import { GithubPermalink } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
@@ -19,12 +41,54 @@ export function MyApp() {
 }
 ```
 
-I also highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.visualstudio.com/items?itemName=hogashi.vscode-copy-github-permalink) which makes for ease in generating the permalinks from within VSCode.
+
+### Provide your own data
+
+```jsx
+import { GithubPermalinkBase } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return          <GithubPermalinkBase
+            permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"
+            data={{
+                lines: [
+                    "package main",
+                    "import \"fmt\"",
+                    "func main() {",
+                    "    fmt.Println(\"hello world\")",
+                    "}"
+                ],
+                lineFrom: 1,
+                lineTo: 5,
+                commit: "5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                path: "sample_files/sample1.go",
+                owner: "dwjohnston",
+                repo: "react-github-permalink",
+                commitUrl: "https://github.com/dwjohnston/react-github-permalink/commit/5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                status: "ok"
+            }} />
+}
+```
+
+You may wish you use this approach if my approach for configuration does not work for you 
+
+### RSC
+
+
+```jsx
+import { GithubPermalinkRsc } from 'react-github-permalink/dist/rsc';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <GithubPermalinkRsc permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
+}
+```
+
+Note that import path is different. 
+
 
 ## Github Issuelink
-
-
-![screenshot of the GithubIssueLink tool in action](./screenshot2.png)
 
 ### Usage
 ```jsx
@@ -36,36 +100,49 @@ export function MyApp() {
 }
 ```
 
-
-## Demo
-
-https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
-
 ## Rate Limits and Authentication
 
-This component makes unauthenticated requests against Github's API. The rate limit for such requests is 60/hour and only publicly visible repositories are available. 
+By default the components make unauthenticated requests against Github's API. The rate limit for such requests is 60/hour and only publicly visible repositories are available. 
 
 If you need to avoid rate limits or allow users to view private repos, you can implement your own data fetching function. 
 
 ## Configuration 
 
-You can provide your own data fetching function via a context provider. 
+The global configuration object has this signature
 
-### Custom Data Function
+```ts
+type BaseConfiguration = {
+    getDataFn: (permalink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubPermalinkDataResponse>;
+    getIssueFn: (issueLink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubIssueLinkDataResponse>;
+    githubToken: string | undefined;
+    onError: ((e: unknown) => void) | undefined;
+}
+```
 
-```jsx
-import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink';
+### Configure client components via GithubPermalinkProvider
+
+Client components are configured via context provider: 
+
+```tsx
+import { GithubPermalink, GithubIssueLink GithubPermalinkProvider,  } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
-    return <GithubPermalinkProvider getDataFn ={(permalink: string) => {
+    return <GithubPermalinkProvider 
+        getDataFn ={(permalink: string) => {
             // Your implementation to retrieve permalinks here 
         }}
         getIssueFn={(issueLink: string) => {
             // Your implementation to retrieve issue links here
         }}
 
-    
+        // Don't put a put a github token into the context provider in production! It will visible for all the world to see!
+        // Instead you will need to expose a data fetching function on the backend to do it for you 
+        githubToken={process.env.NODE_ENV='development' && process.env.MY_GITHUB_TOKEN}
+
+        onError={(err) => {
+            Sentry.captureException(err);
+        }}
     >  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
         <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />
@@ -73,36 +150,23 @@ export function MyApp() {
 }    
 ```
 
-### Using a github token 
+### Configure RSC components via githubPermalinkRscConfig singleton
 
-In development you may find yourself hitting the API rate limit rather quickly, and this can be pain. 
+In a Next.js 13 app using the app router, I recommend configuring the `githubPermalinkRscConfig` object in your route level `layout.tsx` file. 
 
-You can provide a Github token to avoid this. 
+```tsx
 
-**Do not use your private tokens in production, they will be public for the world to see!**
-
-```jsx
-import { GithubPermalink, GithubPermalinkContext } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css";
+import {githubPermalinkRscConfig} from "react-github-permalink/dist/rsc";
+githubPermalinkRscConfig.setConfig({
+  githubToken: process.env.GITHUB_TOKEN
+})
 
-export function MyApp() {
-    return <GithubPermalinkProvider githubToken={process.env.NODE_ENV='development' && process.env.MY_GITHUB_TOKEN}>  
-        <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
-    </GithubPermalinkProvider>
-}    
-
-```
-
-### Error reporting 
-
-It might be helpful to know if users are encountering API errors, for example if they are being rate limited. 
-
-The `onError` property can allow you to report these errors to sentry for example. 
-
-```jsx
-<GithubPermalinkProvider onError={(err) => {
-    Sentry.captureException(err);
-}}>  
-
-    </GithubPermalinkProvider>
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+   // your layout component here 
+}
 ```
