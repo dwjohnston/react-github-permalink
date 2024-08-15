@@ -22,36 +22,23 @@ export type ErrorResponses = {
     status: "other-error"
 }
 
-export type GithubPermalinkSuccessData = (GithubPermalinkUrlInfo & {
+export type GithubPermalinkSuccessData =  (GithubPermalinkUrlInfo & {
     lines: Array<string>;
     commitUrl: string;
     status: "ok"
-})
+}) 
 
-export type GithubPermalinkDataResponse = GithubPermalinkSuccessData | ErrorResponses;
+export type GithubPermalinkDataResponse = GithubPermalinkSuccessData| ErrorResponses; 
 
 
 export type GithubIssueLinkDataResponse = {
-    issueTitle: string;
-    issueNumber: string;
-    issueState: "open" | "closed";
-    owner: string;
-    repo: string;
+    issueTitle: string; 
+    issueNumber: string; 
+    issueState: "open" | "closed"; 
+    owner: string; 
+    repo: string; 
     status: "ok"
-
-    // Future - will be mandatory 
-    reactions?: {
-        "+1": number,
-        "-1": number,
-        confused: number,
-        eyes: number,
-        heart: number,
-        hooray: number,
-        laugh: number,
-        rocket: number,
-        total_count: number
-    }
-} | ErrorResponses;
+} | ErrorResponses; 
 
 
 
