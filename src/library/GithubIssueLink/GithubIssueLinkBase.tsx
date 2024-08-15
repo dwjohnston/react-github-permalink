@@ -1,21 +1,22 @@
 
 import { PropsWithChildren } from "react";
 import { GithubSvg } from "../GithubSvg/GithubSvg";
-import {   GithubIssueLinkDataResponse } from "../config/GithubPermalinkContext";
+import { GithubIssueLinkDataResponse } from "../config/GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 import { Reactions } from "../common/Reactions/Reactions";
 
 
 type GithubIssueLinkBaseProps = {
-    className?: string;
-    issueLink: string;
-    data: GithubIssueLinkDataResponse;
+  className?: string;
+  issueLink: string;
+  data: GithubIssueLinkDataResponse;
+  variant?: "block" | "inline";
 }
 
 
 
 export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
-    const {data} =  props; 
+  const { data, variant = "block" } = props;
 
     if (data.status === "ok") {
         return <GithubIssueLinkInner {...props} header={<>
@@ -46,25 +47,32 @@ export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
       }
     
       return <GithubIssueLinkInner {...props}>
-        <ErrorMessages data={data} />
+        <ErrorMessages data={data} issueLink={props.issueLink} />
       </GithubIssueLinkInner>
 
 }
 
 
 function GithubIssueLinkInner(props: PropsWithChildren<{
-    header?: React.ReactNode
-  } & {
-    issueLink: string; 
-    className?: string; 
-  }>) {
-    return <div className={`rgp-base react-github-issuelink ${props.className ?? ''} `}>
-      <a href={props.issueLink}>
-        <div className="header"> 
-          {props.header ?? <a href={props.issueLink} className="file-link">{props.issueLink}</a>}
-        </div>
-        {props.children}
-      </a>
-    </div>
+  header?: React.ReactNode
+} & {
+  issueLink: string;
+  className?: string;
+  variant?: "block" | "inline";
+}>) {
+
+  const {issueLink, className ='', variant ="block"} = props;
+
+  if(variant === "inline"){
+    return <a href ={issueLink}>{props.children}</a>
   }
-  
+
+  return <div className={`rgp-base react-github-issuelink ${className} ${variant} `}>
+    <a href={issueLink}>
+      <div className="header">
+        {props.header ?? <a href={issueLink} className="file-link">{issueLink}</a>}
+      </div>
+      {props.children}
+    </a>
+  </div>
+}
