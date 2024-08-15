@@ -10,13 +10,12 @@ type GithubIssueLinkBaseProps = {
   className?: string;
   issueLink: string;
   data: GithubIssueLinkDataResponse;
-  variant?: "block" | "inline";
 }
 
 
 
 export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
-  const { data, variant = "block" } = props;
+  const { data } = props;
 
     if (data.status === "ok") {
         return <GithubIssueLinkInner {...props} header={<>
@@ -47,7 +46,7 @@ export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
       }
     
       return <GithubIssueLinkInner {...props}>
-        <ErrorMessages data={data} issueLink={props.issueLink} />
+        <ErrorMessages data={data} />
       </GithubIssueLinkInner>
 
 }
@@ -58,16 +57,11 @@ function GithubIssueLinkInner(props: PropsWithChildren<{
 } & {
   issueLink: string;
   className?: string;
-  variant?: "block" | "inline";
 }>) {
 
-  const {issueLink, className ='', variant ="block"} = props;
+  const {issueLink, className =''} = props;
 
-  if(variant === "inline"){
-    return <a href ={issueLink}>{props.children}</a>
-  }
-
-  return <div className={`rgp-base react-github-issuelink ${className} ${variant} `}>
+  return <div className={`rgp-base react-github-issuelink ${className}`}>
     <a href={issueLink}>
       <div className="header">
         {props.header ?? <a href={issueLink} className="file-link">{issueLink}</a>}
