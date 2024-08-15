@@ -32,7 +32,8 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         issueState: issueJson.state,
         status: "ok",
         owner: config.owner,
-        repo: config.repo
+        repo: config.repo, 
+        reactions: issueJson.reactions,
     };
 }export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
     const config = parseGithubPermalinkUrl(permalink);
