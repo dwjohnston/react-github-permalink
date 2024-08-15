@@ -4,7 +4,7 @@
   "files": [
     "dist"
   ],
-  "version": "1.7.0",
+  "version": "1.7.1",
   "scripts": {
     "next:dev": "next dev",
     "next:build": "next build",
