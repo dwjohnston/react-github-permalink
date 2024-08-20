@@ -1,3 +1,8 @@
+
+## 1.8.1 
+
+Adds issue link emoji reactions
+
 ## 1.7.0 
 
 Adds RSCs versions of components: GithubPermalinkRsc and GithubIssueLinkRsc. 
