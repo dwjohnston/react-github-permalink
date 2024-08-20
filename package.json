@@ -4,7 +4,11 @@
   "files": [
     "dist"
   ],
-  "version": "1.7.0",
+  "version": "1.8.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwjohnston/react-github-permalink.git"
+  },
   "scripts": {
     "next:dev": "next dev",
     "next:build": "next build",
