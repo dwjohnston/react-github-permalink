@@ -54,12 +54,24 @@
     --rgp-color-status-closed: rgb(130, 80, 223);
     --rgp-color-status-error: red;
 
-    --rgp-color-reaction-foreground: #4493f8; 
+    --rgp-color-reaction-forergound: #4493f8; 
     --rgp-color-reaction-background: #388bfd33;
 
     
     }
 }
+
+.react-github-issue-link-inline {
+    color: var(--rgp-color-reaction-forergound); 
+    border: solid 1px var(--rgp-color-text-frame); 
+    border-radius: 2px;
+    background-color: var(--rgp-color-bg-stark); 
+    font-family: monospace;
+    padding: 0 0.25em;
+    margin: 0 0.25em;
+}
+
+
 
 svg.github-logo{
     fill: var(--rgp-color-commit-link);
