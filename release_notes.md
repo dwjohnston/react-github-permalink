@@ -1,3 +1,11 @@
+## 1.8.1
+
+non-functional change - fixes package.json to allow images to show in the NPM readme
+
+## 1.8.0 
+
+Adds emoji reactions to IssueLinks
+
 ## 1.7.0 
 
 Adds RSCs versions of components: GithubPermalinkRsc and GithubIssueLinkRsc. 
