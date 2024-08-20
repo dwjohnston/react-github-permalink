@@ -1,3 +1,9 @@
+## 1.7.0 
+
+Adds RSCs versions of components: GithubPermalinkRsc and GithubIssueLinkRsc. 
+
+Exposes Base versions of components: GithubPermalinkBase and GithubIssueLinkBase 
+
 ## 1.6.0 
 
 Makes Next14/RSC friendly - adds "use client" directives 
