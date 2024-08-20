@@ -4,18 +4,30 @@ import { GithubSvg } from "../GithubSvg/GithubSvg";
 import { GithubIssueLinkDataResponse } from "../config/GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
 import { Reactions } from "../common/Reactions/Reactions";
+import { Inline } from "../common/Inline/Inline";
 
 
 type GithubIssueLinkBaseProps = {
   className?: string;
   issueLink: string;
   data: GithubIssueLinkDataResponse;
+  variant?: "inline" | "block"
 }
 
 
 
 export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
-  const { data } = props;
+  const { data, variant ="block", issueLink} = props;
+
+
+    if (variant === "inline"){
+      if(data.status === "ok"){
+        return <Inline href={issueLink} text={`${data.owner}/${data.repo}#${data.issueNumber}`}/>
+      }
+      else {
+        return <Inline href={issueLink} text={issueLink}/>
+      }
+    }
 
     if (data.status === "ok") {
         return <GithubIssueLinkInner {...props} header={<>

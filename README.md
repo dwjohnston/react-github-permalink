@@ -6,8 +6,11 @@ Display Github issue links.
 
 ![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
-![screenshot of the tool in action - light mode ](./screenshot-issuelink-dark.png)
+![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-issuelink-light.png)
+![screenshot of the tool in action - dark mode - inline ](./screenshot-issuelink-inline-dark.png)
+![screenshot of the tool in action - light mode - inline ](./screenshot-issuelink-inline-light.png)
+
 
 
 
