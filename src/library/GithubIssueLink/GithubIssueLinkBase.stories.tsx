@@ -47,7 +47,7 @@ export const BlockError: Story = {
 
 
 export const InlineSuccess: Story = {
-    render: () => (<p> Blah blah for more details see this issue:
+    render: () => (<p> For more details see this issue:
         <GithubIssueLinkBase
             issueLink="https://github.com/dwjohnston/react-github-permalink/issues/2"
             variant="inline"
@@ -62,8 +62,26 @@ export const InlineSuccess: Story = {
     ),
 };
 
+
+export const InlineSuccessWithStyling: Story = {
+    render: () => (<p style={{fontSize: "20px"}}> For more details see this issue:
+        <GithubIssueLinkBase
+            issueLink="https://github.com/dwjohnston/react-github-permalink/issues/2"
+            variant="inline"
+            data={{
+                "issueNumber": "123",
+                "issueState": "open",
+                "issueTitle": "Issue title",
+                "owner": "owner-name",
+                "repo": "repo-name",
+                "status": "ok"
+            }} /></p>
+    ),
+};
+
+
 export const InlineError: Story = {
-    render: () => (<p> Blah blah blah, for more details see this issue
+    render: () => (<p> For more details see this issue:
         <GithubIssueLinkBase
             variant="inline"
             issueLink="https://github.com/dwjohnston/react-github-permalink/issues/2"
