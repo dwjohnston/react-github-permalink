@@ -22,7 +22,7 @@ export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
 
     if (variant === "inline"){
       if(data.status === "ok"){
-        return <Inline href={issueLink} text={`${data.owner}/${data.repo}#${data.issueNumber}`}/>
+        return <Inline href={issueLink} text={`${data.owner}/${data.repo}#${data.issueNumber}  ${data.issueTitle}`}/>
       }
       else {
         return <Inline href={issueLink} text={issueLink}/>
