@@ -1,4 +1,10 @@
-## Not yet released
+## 1.9.1
+
+Fixes the inline variant. 
+
+Adds a new error message type for 401 responses.
+
+## 1.9.0
 
 Add inline variant of IssueLink
 
