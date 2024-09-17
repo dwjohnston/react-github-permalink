@@ -21,6 +21,13 @@ export function ErrorMessages(props: {
           </p>
         </>
       }
+      if(data.status === "unauthorized"){
+        return <>
+        <p className="error"> 
+          Unauthorized. Is your Github token valid?
+        </p>
+      </>
+      }
     
       if(data.status ==="other-error"){
         return <>

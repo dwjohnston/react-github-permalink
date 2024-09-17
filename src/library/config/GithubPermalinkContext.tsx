@@ -20,6 +20,9 @@ export type ErrorResponses = {
     status: "404"
 } | {
     status: "other-error"
+} | 
+{
+    status: "unauthorized"
 }
 
 export type GithubPermalinkSuccessData = (GithubPermalinkUrlInfo & {

@@ -52,7 +52,6 @@
     "storybook": "^8.2.5",
     "web-vitals": "^2.1.0",
     "next": "14.2.5",
-    "react-github-permalink": "^1.6.0",
     "react-syntax-highlighter": "^15.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",

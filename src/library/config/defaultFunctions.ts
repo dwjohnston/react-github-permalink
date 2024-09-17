@@ -86,6 +86,12 @@ export function handleResponse(response: Response): ErrorResponses {
             status: "rate-limit"
         };
     }
+
+    if(response.status === 401) {
+        return {
+            status: "unauthorized"
+        }
+    }
     return {
         status: "other-error"
     };

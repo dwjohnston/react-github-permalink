@@ -3,12 +3,10 @@
 import {  useContext, useEffect, useState } from "react";
 
 import {  GithubPermalinkContext, GithubIssueLinkDataResponse } from "../config/GithubPermalinkContext";
-import { GithubIssueLinkBase } from "./GithubIssueLinkBase";
+import { GithubIssueLinkBase, GithubIssueLinkBaseProps } from "./GithubIssueLinkBase";
 
-type GithubIssueLinkProps = {
-  issueLink: string;
-  className?: string;
-};
+type GithubIssueLinkProps = Omit<GithubIssueLinkBaseProps, "data">;
+
 export function GithubIssueLink(props: GithubIssueLinkProps) {
 
   const { issueLink } = props;
@@ -30,7 +28,7 @@ export function GithubIssueLink(props: GithubIssueLinkProps) {
     throw new Error("Loading is complete, but no data was returned.")
   }
 
-  return <GithubIssueLinkBase issueLink={issueLink} data={data} className={props.className}/>
+  return <GithubIssueLinkBase {...props} data={data}/>
 
 }
 

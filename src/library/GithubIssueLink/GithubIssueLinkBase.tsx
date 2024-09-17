@@ -7,7 +7,7 @@ import { Reactions } from "../common/Reactions/Reactions";
 import { Inline } from "../common/Inline/Inline";
 
 
-type GithubIssueLinkBaseProps = {
+export type GithubIssueLinkBaseProps = {
   className?: string;
   issueLink: string;
   data: GithubIssueLinkDataResponse;
@@ -18,7 +18,6 @@ type GithubIssueLinkBaseProps = {
 
 export function GithubIssueLinkBase(props: GithubIssueLinkBaseProps) {
   const { data, variant ="block", issueLink} = props;
-
 
     if (variant === "inline"){
       if(data.status === "ok"){
