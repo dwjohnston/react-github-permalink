@@ -6,8 +6,11 @@ Display Github issue links.
 
 ![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
-![screenshot of the tool in action - light mode ](./screenshot-issuelink-dark.png)
+![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-issuelink-light.png)
+![screenshot of the tool in action - dark mode - inline ](./screenshot-issuelink-inline-dark.png)
+![screenshot of the tool in action - light mode - inline ](./screenshot-issuelink-inline-light.png)
+
 
 
 
@@ -100,6 +103,15 @@ export function MyApp() {
 }
 ```
 
+
+IssueLink also has an inline variant: 
+
+```jsx
+export function MyApp() {
+    return  <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' variant="inline"/>,
+}
+```
+
 ## Rate Limits and Authentication
 
 By default the components make unauthenticated requests against Github's API. The rate limit for such requests is 60/hour and only publicly visible repositories are available. 
@@ -152,7 +164,7 @@ export function MyApp() {
 
 ### Configure RSC components via githubPermalinkRscConfig singleton
 
-In a Next.js 13 app using the app router, I recommend configuring the `githubPermalinkRscConfig` object in your route level `layout.tsx` file. 
+In a Next.js 13+ app using the app router, I recommend configuring the `githubPermalinkRscConfig` object in your route level `layout.tsx` file. 
 
 ```tsx
 
