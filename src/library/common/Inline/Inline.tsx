@@ -1,4 +1,4 @@
-import { GithubSvg } from "@/library/GithubSvg/GithubSvg";
+import { GithubSvg } from "../../GithubSvg/GithubSvg";
 
 export function Inline(props: {
     href: string; 
