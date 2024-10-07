@@ -4,6 +4,7 @@ import { GithubSvg } from "../GithubSvg/GithubSvg";
 import { PropsWithChildren } from "react";
 import { SyntaxHighlight } from "../SyntaxHighlight/SyntaxHighlight";
 import { formatForLineExclusions } from "./formatLineExclusions";
+import { CopySvg } from "../images/CopySvg";
 
 export type GithubPermalinkBaseProps = {
     className?: string;
@@ -25,14 +26,21 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
         const formatedLineExclusions = formatForLineExclusions(data, excludeLines);
 
-        return <GithubPermalinkInner {...props} header={<>
+        const clipboard = formatedLineExclusions.reduce((acc, cur) => {
+            if (cur.isExclude) {
+                return acc + "\n";
+            }
+
+            return acc + "\n" + cur.lines.join("\n");
+        }, '')
+        return <GithubPermalinkInner {...props} clipboard={clipboard} header={<>
             <a href={permalink} className="file-link">{`${data.owner}/${data.repo}/${data.path}`}</a>
             <p>{data.lineFrom === data.lineTo ? <>Line {data.lineFrom}</> : <>Lines {data.lineFrom} to {data.lineTo}</>} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
         </>}>
 
             {formatedLineExclusions.map((v) => {
                 if (v.isExclude) {
-                    return <SyntaxHighlight  className="hide-line-numbers" text={excludeText} startingLineNumber={v.from}/>
+                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} />
 
                 }
 
@@ -52,7 +60,12 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
 function GithubPermalinkInner(props: PropsWithChildren<{
     header?: React.ReactNode
+    clipboard?: string;
 } & GithubPermalinkBaseProps>) {
+
+    const {clipboard} = props;
+
+
     return <div className={`rgp-base react-github-permalink ${props.className ?? ''}`}>
         <div className="header">
             <div>
@@ -62,7 +75,18 @@ function GithubPermalinkInner(props: PropsWithChildren<{
             <div className="link-wrapper">
                 {props.header ?? <a href={props.permalink} className="file-link">{props.permalink}</a>}
             </div>
+
+            {clipboard && <div className="copy-button-container">
+                <button title="Copy snippet" onClick={() => {
+                    navigator.clipboard.writeText(clipboard)
+                }}>
+                    <CopySvg />
+                </button>
+            </div>}
         </div>
         {props.children}
     </div>
 }
+
+
+

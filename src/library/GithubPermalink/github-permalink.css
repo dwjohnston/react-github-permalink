@@ -22,6 +22,12 @@
     --rgp-color-reaction-foreground: #0969da; 
     --rgp-color-reaction-background: #ddf4ff;
 
+    --rgp-color-button-text: #59636e;
+    --rgp-color-button-background: #f6f8fa;
+    --rgp-color-button-background-hover: #eff2f5;
+    --rgp-color-button-border: #d1d9e0;
+    ;
+
 
     color: var(--rgp-color-text-stark);
 
@@ -56,6 +62,13 @@
 
     --rgp-color-reaction-foreground: #4493f8; 
     --rgp-color-reaction-background: #388bfd33;
+
+    
+    --rgp-color-button-text: #9198a1;
+    --rgp-color-button-background: #212830;
+    --rgp-color-button-background-hover:     #262c36;
+
+    --rgp-color-button-border: #3d444d;
 
     
     }
@@ -201,6 +214,45 @@ svg.github-logo{
     align-items: center;
 }
 
+.copy-button-container {
+        button {
+            all: unset;
+            /* Remove default styling */
+            appearance: none; 
+            /* Remove specific styling across different browsers */
+            border: none; 
+            /* Remove any border */
+            background: none;
+            /* Remove background */
+            padding: 0;
+            /* Remove default padding */
+            margin: 0;
+            /* Remove default margin */
+            box-shadow: none;
+            /* Remove box shadow */
+            text-align: inherit;
+            /* Inherit text alignment from parent */
+            font: inherit;
+            /* Use parent's font settings */
+            color: inherit;
+            /* Use parent's text color */
+            cursor: pointer;
+            /* Set pointer cursor for better UX */
+            background-color: var(--rgp-color-button-background);
+            border: solid 1px var(--rgp-color-button-border);
+            padding: 0.5em;
+            border-radius: 0.25em;
+            svg {
+                fill: var(--rgp-color-button-text);
+            }
+            &:hover {
+                background-color: var(--rgp-color-button-background-hover);
+              }
+
+          }
+          
+}
+
 .react-github-permalink .header, .react-github-issuelink .header{
     border-width: 0 0 1px 0; 
     font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
@@ -234,6 +286,7 @@ svg.github-logo{
     .link-wrapper {
         min-width: 0; 
         overflow: hidden;
+        flex: 1 1 auto;
 
         a {
 
