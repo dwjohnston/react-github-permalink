@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { GithubPermalinkRsc } from "../library/GithubPermalink/GithubPermalinkRsc";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
+import "../library/GithubPermalink/github-permalink.css"
 
 export default function Home() {
   return (

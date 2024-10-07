@@ -39,3 +39,74 @@ export const Primary: Story = {
             }} />
     ),
 };
+
+export const WithLineExclusions: Story = {
+    render: () => (
+        <GithubPermalinkBase
+            permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"
+            data={{
+                lines: [
+                  "a",
+                  "b",
+                  "c",
+                  "d",
+                  "e",
+                  "f",
+                  "g",
+                  "h",
+                  "i",
+                  "j"
+                ],
+                lineFrom: 101,
+                lineTo: 110,
+                commit: "5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                path: "sample_files/sample1.go",
+                owner: "dwjohnston",
+                repo: "react-github-permalink",
+                commitUrl: "https://github.com/dwjohnston/react-github-permalink/commit/5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                status: "ok"
+            }} 
+            excludeLines={[[105, 107]]}
+            excludeText="custom exclusion text"
+            
+            />
+    ),
+};
+
+const code =`
+schemas.forEach(function (schema) {
+    for (var ii = 0; ii < schema.length; ++ii) {
+      var type = schema[ii]
+      if (!types[type]) throw unknownType(ii, type)
+    }
+    if (/E.*E/.test(schema)) throw moreThanOneError(schema)
+    addSchema(schema, arity)
+    if (/E/.test(schema)) {
+      addSchema(schema.replace(/E.*$/, 'E'), arity)
+      addSchema(schema.replace(/E/, 'Z'), arity)
+      if (schema.length === 1) addSchema('', arity)
+    }
+  })
+`
+
+export const WithLineExclusionsRealCode: Story = {
+    render: () => (
+        <GithubPermalinkBase
+            permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"
+            data={{
+                lines: code.split('\n'),
+                lineFrom: 101,
+                lineTo: 110,
+                commit: "5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                path: "sample_files/sample1.go",
+                owner: "dwjohnston",
+                repo: "react-github-permalink",
+                commitUrl: "https://github.com/dwjohnston/react-github-permalink/commit/5b15aa07e60af4e317086f391b28cadf9aae8e1b",
+                status: "ok"
+            }} 
+            excludeLines={[[105, 107]]}
+            excludeText="// snip"
+            
+            />
+    ),
+};
