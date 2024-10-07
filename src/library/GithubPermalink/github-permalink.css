@@ -80,6 +80,28 @@
     }
 }
 
+.rgp-base {
+
+    pre + .hide-line-numbers {
+        margin-top: -1em;
+    }
+
+    .hide-line-numbers + pre {
+        margin-top: 0em;
+
+    }
+
+    .hide-line-numbers {
+        margin:0;
+    }
+    
+    .hide-line-numbers .linenumber {
+        visibility: hidden;
+    }
+
+}
+
+
 
 
 svg.github-logo{
