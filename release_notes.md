@@ -1,3 +1,9 @@
+## 1.10.0 
+
+Adds line exclusions
+
+Adds copy snippet button 
+
 ## 1.9.1
 
 Fixes the inline variant. 
