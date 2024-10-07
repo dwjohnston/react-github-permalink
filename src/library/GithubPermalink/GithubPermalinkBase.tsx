@@ -5,6 +5,7 @@ import { PropsWithChildren } from "react";
 import { SyntaxHighlight } from "../SyntaxHighlight/SyntaxHighlight";
 import { formatForLineExclusions } from "./formatLineExclusions";
 import { CopySvg } from "../images/CopySvg";
+import { CopyButton } from "../common/CopyButton/CopyButton";
 
 export type GithubPermalinkBaseProps = {
     className?: string;
@@ -63,7 +64,7 @@ function GithubPermalinkInner(props: PropsWithChildren<{
     clipboard?: string;
 } & GithubPermalinkBaseProps>) {
 
-    const {clipboard} = props;
+    const { clipboard } = props;
 
 
     return <div className={`rgp-base react-github-permalink ${props.className ?? ''}`}>
@@ -77,11 +78,7 @@ function GithubPermalinkInner(props: PropsWithChildren<{
             </div>
 
             {clipboard && <div className="copy-button-container">
-                <button title="Copy snippet" onClick={() => {
-                    navigator.clipboard.writeText(clipboard)
-                }}>
-                    <CopySvg />
-                </button>
+                <CopyButton clipboard={clipboard} />
             </div>}
         </div>
         {props.children}
