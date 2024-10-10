@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { CopySvg } from "../../images/CopySvg";
+import { TickSvg } from "../../images/TickSvg";
 
 
 export function CopyButton(props: { clipboard: string }) {
@@ -11,21 +12,39 @@ export function CopyButton(props: { clipboard: string }) {
     const idCopied = useId();
 
     const copyRef = useRef<HTMLDivElement>(null);
+    const copiedRef = useRef<HTMLDivElement>(null);
+
     const [isClicked, setIsClicked] = useState(false);
 
 
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsClicked(false);
+            copiedRef.current?.hidePopover();
+        }, 2000)
+
+        return () => {
+            clearTimeout(timeout);
+
+            
+        }
+    }, [isClicked])
 
 
-    return <div className="copy-wrapper">
-        <div className="tooltip" id={idCopy} popover="auto" ref={copyRef}>Copy snippet</div>
-        <div className="tooltip" id={idCopied} popover="auto">Copied!</div>
+    return <div className="tooltip-container">
 
+        <div className="tooltip-target" id={idCopy} popover="auto" ref={copyRef}></div>
+        <div className="tooltip-content" >Copy snippet</div>
+        <div className="tooltip-target" id={idCopied} popover="auto" ref={copiedRef}></div>
+        <div className="tooltip-content">Copied!</div>
         <button 
-
         className={isClicked? "clicked": "not-clicked"}
         onMouseEnter={() =>{
-            copyRef.current?.showPopover()
+
+            if(!isClicked){
+                copyRef.current?.showPopover();
+            }
         }}
 
         onMouseLeave={(()=>{
@@ -40,7 +59,9 @@ export function CopyButton(props: { clipboard: string }) {
 
 
     }}>
-        <CopySvg />
+
+        {isClicked ? <TickSvg/>:
+        <CopySvg />}
     </button>
     </div>
 

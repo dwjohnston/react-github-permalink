@@ -23,9 +23,11 @@
     --rgp-color-reaction-background: #ddf4ff;
 
     --rgp-color-button-text: #59636e;
+    --rgp-color-button-text-success: #3fb950;
     --rgp-color-button-background: #f6f8fa;
     --rgp-color-button-background-hover: #eff2f5;
     --rgp-color-button-border: #d1d9e0;
+    --rgp-color-tooltip-bg: #3d444d;
     ;
 
 
@@ -215,6 +217,67 @@ svg.github-logo{
 }
 
 .copy-button-container {
+
+        .tooltip-container{
+            position: relative;
+            anchor-name: --tooltip-anchor;
+        }
+
+        .tooltip-content {
+
+            position: absolute; 
+            top: -14px; 
+            left: -26px;
+            background-color: var(--rgp-color-tooltip-bg);
+
+            transition-property: opacity;
+            transition-duration: 0.25s;
+            opacity: 1;
+
+            @starting-style {
+                opacity: 0;
+            }
+
+            @supports(position-anchor: --tooltip-anchor){
+                position: fixed; 
+                position-anchor: --tooltip-anchor;
+                top:unset; 
+                left: unset;
+                bottom: anchor(top);
+                justify-self: anchor-center;
+                margin: 3px;
+
+            }
+
+
+            height: 12px; 
+     
+            
+            white-space: nowrap;
+            border-radius: 2px; 
+
+            color: var(--rgp-color-text-stark);
+            box-shadow: 2px 2px 2px var(--rgp-color-bg-stark);
+
+            font-size: 11px; 
+            padding: 0.5em 0.75em;
+        }
+
+        .tooltip-target[popover] {
+            overlay: none !important;
+            display: none;
+        }
+
+        .tooltip-target[popover]:popover-open + .tooltip-content {
+            display: block;
+        }
+
+        .tooltip-target[popover] + .tooltip-content {
+            display: none;
+        }
+
+
+
         button {
             all: unset;
             /* Remove default styling */
@@ -242,8 +305,15 @@ svg.github-logo{
             border: solid 1px var(--rgp-color-button-border);
             padding: 0.5em;
             border-radius: 0.25em;
+
+
+            color: var(--rgp-color-button-text);
+
+            &.clicked {
+                color: var(--rgp-color-button-text-success);
+            }
             svg {
-                fill: var(--rgp-color-button-text);
+                fill: currentColor;
             }
             &:hover {
                 background-color: var(--rgp-color-button-background-hover);
