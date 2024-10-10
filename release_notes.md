@@ -1,3 +1,11 @@
+## 1.10.1
+
+Fixes a "Error: Cannot access .prototype on the server" error 
+
+See: https://github.com/vercel/next.js/issues/52415
+
+Adds tooltip to the copy button.
+
 ## 1.10.0 
 
 Adds line exclusions
