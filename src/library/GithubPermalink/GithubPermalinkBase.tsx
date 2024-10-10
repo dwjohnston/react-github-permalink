@@ -41,11 +41,11 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
             {formatedLineExclusions.map((v) => {
                 if (v.isExclude) {
-                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} />
+                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} key={v.from}/>
 
                 }
 
-                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} />
+                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} key={v.from}/>
 
             })}
 

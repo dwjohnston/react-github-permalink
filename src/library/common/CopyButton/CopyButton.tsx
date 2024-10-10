@@ -34,8 +34,10 @@ export function CopyButton(props: { clipboard: string }) {
 
     return <div className="tooltip-container">
 
+         {/* @ts-ignore */}
         <div className="tooltip-target" id={idCopy} popover="auto" ref={copyRef}></div>
         <div className="tooltip-content" >Copy snippet</div>
+        {/* @ts-ignore */}
         <div className="tooltip-target" id={idCopied} popover="auto" ref={copiedRef}></div>
         <div className="tooltip-content">Copied!</div>
         <button 
@@ -51,6 +53,8 @@ export function CopyButton(props: { clipboard: string }) {
             copyRef.current?.hidePopover()
         })}
 
+        // Need to use React 19 to get the proper typings :/
+        // @ts-ignore- https://github.com/facebook/react/issues/27479
         popoverTarget={idCopied}
         title="Copy snippet" 
         onClick={() => {
