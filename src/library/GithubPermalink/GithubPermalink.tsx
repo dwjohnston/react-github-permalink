@@ -3,15 +3,12 @@
 import {useContext, useEffect, useState } from "react";
 import { GithubPermalinkDataResponse, GithubPermalinkContext } from "../config/GithubPermalinkContext";
 import { useMediaQuery } from "react-responsive";
-import { GithubPermalinkBase } from "./GithubPermalinkBase";
+import { GithubPermalinkBase, GithubPermalinkBaseProps } from "./GithubPermalinkBase";
 
-type GithubPermalinkProps = {
-  permalink: string;
-  className?: string;
-};
+type GithubPermalinkProps = Omit<GithubPermalinkBaseProps, "data"> & {permalink: string};
 export function GithubPermalink(props: GithubPermalinkProps) {
 
-  const { permalink, className } = props;
+  const { permalink } = props;
   const [data, setData] = useState(null as null | GithubPermalinkDataResponse)
   const { getDataFn, githubToken, onError } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +28,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
   }
 
 
-  return <GithubPermalinkBase className={className} permalink={permalink} data={data}/>
+  return <GithubPermalinkBase data={data} {...props}/>
 }
 
 

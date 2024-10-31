@@ -1,3 +1,8 @@
+
+## 1.10.2 
+
+Fix bug where line exclusions weren't working for GithubPermalinkRsc and GithubPermalink
+
 ## 1.10.1
 
 Fixes a "Error: Cannot access .prototype on the server" error 
