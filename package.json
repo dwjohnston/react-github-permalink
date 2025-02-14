@@ -1,6 +1,7 @@
 {
   "name": "react-github-permalink",
   "main": "dist/export.js",
+  "license":"MIT",
   "files": [
     "dist"
   ],
