@@ -1,11 +1,11 @@
 {
   "name": "react-github-permalink",
   "main": "dist/export.js",
-  "license":"MIT",
+  "license": "MIT",
   "files": [
     "dist"
   ],
-  "version": "1.10.2",
+  "version": "1.10.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dwjohnston/react-github-permalink.git"
