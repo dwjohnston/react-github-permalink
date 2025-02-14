@@ -1,4 +1,8 @@
 
+## 1.10.3
+
+Adds the license to the package. 
+
 ## 1.10.2 
 
 Fix bug where line exclusions weren't working for GithubPermalinkRsc and GithubPermalink
