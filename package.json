@@ -50,13 +50,13 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-plugin-storybook": "^0.8.0",
-    "next": "14.2.5",
+    "next": "14.2.30",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-syntax-highlighter": "^15.5.0",
-    "storybook": "^8.2.5",
+    "storybook": "^8.6.14",
     "typescript": "^5",
-    "vitest": "^2.1.1",
+    "vitest": "^3.2.3",
     "web-vitals": "^2.1.0"
   }
 }
