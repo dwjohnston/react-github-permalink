@@ -1,3 +1,4 @@
+import { expect, test, it, describe } from 'vitest'
 import { parseGithubPermalinkUrl } from "./urlParsers";
 
 describe(parseGithubPermalinkUrl, () => {

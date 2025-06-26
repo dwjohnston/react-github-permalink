@@ -17,9 +17,12 @@
     "next:lint": "next lint",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build && cp -r storybook-static public",
+    "test-storybook": "test-storybook",
     "build": "rm -rf dist && tsc -p tsconfig.build.json && cp src/library/GithubPermalink/github-permalink.css dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "changeset": "changeset",
+    "release": "changeset publish"
   },
   "dependencies": {
     "react-responsive": "^10.0.0",
@@ -29,6 +32,7 @@
     "react": ">=18.3"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.5",
     "@chromatic-com/storybook": "^1.6.1",
     "@storybook/addon-essentials": "^8.2.5",
     "@storybook/addon-interactions": "^8.2.5",

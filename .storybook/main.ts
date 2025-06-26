@@ -1,26 +1,23 @@
 import type { StorybookConfig } from "@storybook/react-webpack5";
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-
+  "stories": [
+    "../src/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
+  "addons": [
+    "@storybook/addon-essentials",
+    "@storybook/addon-onboarding", 
+    "@chromatic-com/storybook",
+    "@storybook/addon-interactions"
+  ],
+  framework: "@storybook/nextjs",
+  "staticDirs": [
+    "../public"
+  ],
   features: {
     experimentalRSC: true,
   },
-  addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-onboarding",
-    "@storybook/addon-interactions",
-    "@chromatic-com/storybook"
-  ],
-
-  framework: '@storybook/nextjs', 
-
-
-  docs: {},
-
-  staticDirs: ["../public"],
-
   typescript: {
     reactDocgen: "react-docgen-typescript"
   }
