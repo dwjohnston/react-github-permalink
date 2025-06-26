@@ -2,7 +2,6 @@ import { PropsWithChildren } from "react";
 import { StackOverflowSvg } from "../StackOverflowSvg/StackOverflowSvg";
 import { StackOverflowLinkDataResponse } from "../config/GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
-import { Inline } from "../common/Inline/Inline";
 
 
 export type StackOverflowLinkBaseProps = {
@@ -12,17 +11,25 @@ export type StackOverflowLinkBaseProps = {
   variant?: "inline" | "block"
 }
 
+function StackOverflowInline(props: {
+    href: string; 
+    text: string; 
+}) {
 
+    const {href, text} = props;
+return <a href={href} className = "rgp-base react-stackoverflow-link-inline">
+       <StackOverflowSvg/> <span>{text}</span></a>
+}
 
 export function StackOverflowLinkBase(props: StackOverflowLinkBaseProps) {
   const { data, variant ="block", questionLink} = props;
 
     if (variant === "inline"){
       if(data.status === "ok"){
-        return <Inline href={questionLink} text={`stackoverflow.com/q/${data.questionId}: ${data.questionTitle}`}/>
+        return <StackOverflowInline href={questionLink} text={`stackoverflow.com/q/${data.questionId}: ${data.questionTitle}`}/>
       }
       else {
-        return <Inline href={questionLink} text={questionLink}/>
+        return <StackOverflowInline href={questionLink} text={questionLink}/>
       }
     }
 
