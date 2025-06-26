@@ -1,5 +1,5 @@
-import { expect, test, it, describe } from 'vitest'
-import { parseGithubPermalinkUrl } from "./urlParsers";
+import { expect, it, describe } from 'vitest'
+import { parseGithubPermalinkUrl, parseStackOverflowLink } from "./urlParsers";
 
 describe(parseGithubPermalinkUrl, () => {
     it("behaves correctly for correct urls", () => {
@@ -31,4 +31,30 @@ describe(parseGithubPermalinkUrl, () => {
             "repo": "react-github-permalink",
         })
     })
+});
+
+describe(parseStackOverflowLink, () => {
+    it("behaves correctly for basic stackoverflow urls", () => {
+        expect(
+            parseStackOverflowLink("https://stackoverflow.com/questions/123456/some-question-title")
+        ).toEqual({
+            "questionId": "123456",
+        });
+    });
+
+    it("behaves correctly for stackoverflow urls without title", () => {
+        expect(
+            parseStackOverflowLink("https://stackoverflow.com/questions/123456")
+        ).toEqual({
+            "questionId": "123456",
+        });
+    });
+
+    it("behaves correctly for stackoverflow urls with query parameters", () => {
+        expect(
+            parseStackOverflowLink("https://stackoverflow.com/questions/123456/some-title?noredirect=1&lq=1")
+        ).toEqual({
+            "questionId": "123456",
+        });
+    });
 });

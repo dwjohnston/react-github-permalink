@@ -400,3 +400,94 @@ svg.github-logo{
         margin: 0 2px;
     }
 }
+
+/* Stack Overflow link styles */
+.react-stackoverflow-link {
+    border: 1px solid var(--rgp-color-border);
+    border-radius: 8px;
+    background-color: var(--rgp-color-bg-stark);
+    color: var(--rgp-color-text-stark);
+    font-size: 14px;
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+}
+
+.react-stackoverflow-link a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.react-stackoverflow-link .header {
+    background-color: var(--rgp-color-bg-frame);
+    padding: 8px;
+}
+
+.react-stackoverflow-link-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.react-stackoverflow-link-header p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--rgp-color-text-frame);
+}
+
+.react-stackoverflow-link-body {
+    padding: 8px;
+}
+
+.react-stackoverflow-link-title {
+    font-weight: 600;
+    color: var(--rgp-color-text-stark);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.react-stackoverflow-link-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.react-stackoverflow-link-stats .stat-label {
+    color: var(--rgp-color-text-frame);
+}
+
+.react-stackoverflow-link-stats .stat-value {
+    font-weight: 600;
+    color: var(--rgp-color-text-stark);
+}
+
+.react-stackoverflow-link-stats .answered-indicator {
+    color: #2f7d32;
+    font-weight: bold;
+}
+
+.react-stackoverflow-link-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.react-stackoverflow-link-tags .tag {
+    background-color: #e8f4fd;
+    color: #39739d;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #e8f4fd;
+}
+
+@media (prefers-color-scheme: dark) {
+    .react-stackoverflow-link-tags .tag {
+        background-color: #2d4a5a;
+        color: #9cc3d5;
+        border-color: #2d4a5a;
+    }
+}
+
+.react-stackoverflow-link-inline {
+    color: var(--rgp-color-reaction-foreground);
+}
