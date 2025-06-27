@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { GithubPermalinkRsc } from './GithubPermalinkRsc';
-import { githubPermalinkRscConfig } from '../export';
+import { githubPermalinkRscConfig } from '../rsc';
 import { defaultGetPermalinkFn } from '../config/defaultFunctions';
 
 const meta = {
@@ -24,7 +24,7 @@ export const Basic: Story = {
 export const LineExclusions: Story = {
     args: {
         permalink: "https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5",
-        excludeLines: [[2,4]]
+        excludeLines: [[2, 4]]
     }
 }
 export const Erroring: Story = {
