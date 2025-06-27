@@ -36,3 +36,15 @@ export function parseGithubIssueLink(url: string): { owner: string, repo: string
         throw new Error("Invalid issue link URL");    
     }
 }
+
+export function parseStackOverflowLink(url: string): { questionId: string } {
+    const regex = /^https?:\/\/stackoverflow\.com\/questions\/(\d+)(?:\/[^?]*)?(?:\?.*)?$/;
+    const match = url.match(regex);
+
+    if (match) {
+        const [, questionId] = match;
+        return { questionId };
+    } else {
+        throw new Error("Invalid Stack Overflow question URL");    
+    }
+}

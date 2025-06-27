@@ -1,5 +1,5 @@
-import { GithubIssueLinkDataResponse } from "./GithubPermalinkContext";
-import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParsers";
+import { GithubIssueLinkDataResponse, StackOverflowLinkDataResponse } from "./GithubPermalinkContext";
+import { parseGithubIssueLink, parseGithubPermalinkUrl, parseStackOverflowLink } from "../utils/urlParsers";
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
 
@@ -94,6 +94,40 @@ export function handleResponse(response: Response): ErrorResponses {
     }
     return {
         status: "other-error"
+    };
+}
+
+export async function defaultGetStackOverflowFn(questionLink: string, onError?: (err: unknown) => void): Promise<StackOverflowLinkDataResponse> {
+    const config = parseStackOverflowLink(questionLink);
+
+    // Stack Exchange API doesn't require authentication but has rate limits
+    const apiUrl = `https://api.stackexchange.com/2.3/questions/${config.questionId}?site=stackoverflow&filter=withbody`;
+    
+    const questionResult = await fetch(apiUrl);
+
+    if (!questionResult.ok) {
+        onError?.(questionResult);
+        return handleResponse(questionResult);
+    }
+
+    const questionJson = await questionResult.json();
+    
+    if (!questionJson.items || questionJson.items.length === 0) {
+        return { status: "404" };
+    }
+
+    const question = questionJson.items[0];
+
+    return {
+        questionTitle: question.title,
+        questionId: config.questionId,
+        isAnswered: question.is_answered,
+        answerCount: question.answer_count,
+        score: question.score,
+        viewCount: question.view_count,
+        tags: question.tags,
+        creationDate: question.creation_date,
+        status: "ok"
     };
 }
 

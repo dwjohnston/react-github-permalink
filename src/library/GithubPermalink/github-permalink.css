@@ -1,25 +1,23 @@
-
-
 .rgp-base {
-    --rgp-color-bg-stark: white; 
+    --rgp-color-bg-stark: white;
     --rgp-color-text-stark: rgb(31, 35, 40);
-    
+
     --rgp-color-bg-frame: rgb(246, 248, 250);
     --rgp-color-text-frame: rgb(101, 109, 118);
-  
-    --rgp-color-border: rgb(208, 215, 222); 
+
+    --rgp-color-border: rgb(208, 215, 222);
 
     --rgp-color-issuenumber: rgb(101, 109, 118);
-    --rgp-color-file-link: rgb(9, 105, 218); 
+    --rgp-color-file-link: rgb(9, 105, 218);
     --rgp-color-commit-link: rgb(31, 35, 40);
 
-    --rgp-color-status-foreground: white; 
+    --rgp-color-status-foreground: white;
     --rgp-color-status-open: rgb(31, 136, 61);
     --rgp-color-status-closed: rgb(130, 80, 223);
     --rgp-color-status-error: red;
 
 
-    --rgp-color-reaction-foreground: #0969da; 
+    --rgp-color-reaction-foreground: #0969da;
     --rgp-color-reaction-background: #ddf4ff;
 
     --rgp-color-button-text: #59636e;
@@ -28,15 +26,18 @@
     --rgp-color-button-background-hover: #eff2f5;
     --rgp-color-button-border: #d1d9e0;
     --rgp-color-tooltip-bg: #3d444d;
-    ;
+
+    --rgp-color-stackoverflow-blue: #2b75d0;
+
+    --rgp-color-stackoverflow-answer-green: rgb(24, 134, 75);
+    --rgp-color-stackoverflow-orange: #e7700d;
 
 
-    color: var(--rgp-color-text-stark);
+    --rgp-color-stackoverflow-bg: #ffffff;
+    --rgp-color-stackoverflow-border: #d5d8db;
 
-
-
-
-
+    --rgp-color-stackoverflow-tag-bg: #f0f1f2;
+    --rgp-color-stackoverflow-tag-text: #3b4045;
 
 }
 
@@ -44,43 +45,48 @@
 
     .rgp-base {
 
-    --rgp-color-bg-stark: rgb(29, 31, 33); 
-    --rgp-color-text-stark: rgb(230, 237, 243);
+        --rgp-color-bg-stark: rgb(29, 31, 33);
+        --rgp-color-text-stark: rgb(230, 237, 243);
 
-    
-    --rgp-color-bg-frame: rgb(22, 27, 34);    
-    --rgp-color-text-frame: rgb(141, 150, 160);
-    
-    --rgp-color-border: rgb(48, 54, 61); 
-    
-    --rgp-color-issuenumber: rgb(101, 109, 118);
-    --rgp-color-file-link: rgb(68, 147, 248);
-    --rgp-color-commit-link: rgb(230, 237, 243);
 
-    --rgp-color-status-foreground: white; 
-    --rgp-color-status-open: #238636;
-    --rgp-color-status-closed: rgb(130, 80, 223);
-    --rgp-color-status-error: red;
+        --rgp-color-bg-frame: rgb(22, 27, 34);
+        --rgp-color-text-frame: rgb(141, 150, 160);
 
-    --rgp-color-reaction-foreground: #4493f8; 
-    --rgp-color-reaction-background: #388bfd33;
+        --rgp-color-border: rgb(48, 54, 61);
 
-    
-    --rgp-color-button-text: #9198a1;
-    --rgp-color-button-background: #212830;
-    --rgp-color-button-background-hover:     #262c36;
+        --rgp-color-issuenumber: rgb(101, 109, 118);
+        --rgp-color-file-link: rgb(68, 147, 248);
+        --rgp-color-commit-link: rgb(230, 237, 243);
 
-    --rgp-color-button-border: #3d444d;
+        --rgp-color-status-foreground: white;
+        --rgp-color-status-open: #238636;
+        --rgp-color-status-closed: rgb(130, 80, 223);
+        --rgp-color-status-error: red;
 
-    
+        --rgp-color-reaction-foreground: #4493f8;
+        --rgp-color-reaction-background: #388bfd33;
+
+
+        --rgp-color-button-text: #9198a1;
+        --rgp-color-button-background: #212830;
+        --rgp-color-button-background-hover: #262c36;
+
+        --rgp-color-button-border: #3d444d;
+        --rgp-color-stackoverflow-blue: #89bbec;
+
+
+        --rgp-color-stackoverflow-border: #484c4f;
+        --rgp-color-stackoverflow-bg: #242526;
+        --rgp-color-stackoverflow-tag-bg: #333638;
+        --rgp-color-stackoverflow-tag-text: #dbdddf;
     }
 }
 
 .react-github-issue-link-inline {
-    color: var(--rgp-color-reaction-forergound); 
-    border: solid 1px var(--rgp-color-text-frame); 
+    color: var(--rgp-color-reaction-forergound);
+    border: solid 1px var(--rgp-color-text-frame);
     border-radius: 2px;
-    background-color: var(--rgp-color-bg-stark); 
+    background-color: var(--rgp-color-bg-stark);
     font-family: monospace;
     padding: 0 0.25em;
     margin: 0 0.25em;
@@ -88,28 +94,28 @@
 
 
     .github-logo {
-        position: relative; 
+        position: relative;
         top: 0.1em;
-        width: 0.9em; 
-        height: 0.9em;   
+        width: 0.9em;
+        height: 0.9em;
     }
 }
 
 .rgp-base {
 
-    pre + .hide-line-numbers {
+    pre+.hide-line-numbers {
         margin-top: -1em;
     }
 
-    .hide-line-numbers + pre {
+    .hide-line-numbers+pre {
         margin-top: 0em;
 
     }
 
     .hide-line-numbers {
-        margin:0;
+        margin: 0;
     }
-    
+
     .hide-line-numbers .linenumber {
         visibility: hidden;
     }
@@ -119,19 +125,20 @@
 
 
 
-svg.github-logo{
+svg.github-logo {
     fill: var(--rgp-color-commit-link);
 }
 
 .react-github-issuelink .react-github-issuelink-body {
     font-size: 16px;
     color: var(--rgp-color-text-stark);
-    display: flex; 
-    flex-flow: row nowrap; 
+    display: flex;
+    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     text-decoration: none;
 }
+
 .react-github-issuelink-body p {
     margin: 0;
 }
@@ -143,7 +150,7 @@ svg.github-logo{
 }
 
 .react-github-issuelink a:hover .react-github-issuelink-title,
- .react-github-issuelink a:hover .react-github-issuelink-number  {
+.react-github-issuelink a:hover .react-github-issuelink-number {
     text-decoration: underline;
 }
 
@@ -153,7 +160,7 @@ svg.github-logo{
 }
 
 .react-github-issuelink-repo {
-    font-size: 12px; 
+    font-size: 12px;
     font-weight: bold;
     display: flex;
     flex-flow: row nowrap;
@@ -162,18 +169,18 @@ svg.github-logo{
     text-decoration: underline;
 }
 
-.react-github-issuelink-status  {
-    color: var(--rgp-color-status-foreground); 
-    fill: var(--rgp-color-status-foreground); 
+.react-github-issuelink-status {
+    color: var(--rgp-color-status-foreground);
+    fill: var(--rgp-color-status-foreground);
     font-size: 0.75em;
-    padding: 0 10px; 
-    border-radius: 2em; 
+    padding: 0 10px;
+    border-radius: 2em;
     font-weight: 500;
-    line-height: 24px; 
+    line-height: 24px;
 
-    display: flex; 
-    flex-flow: row nowrap; 
-    align-items: center; 
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     justify-content: space-between;
     gap: 0.6em;
 
@@ -191,26 +198,28 @@ svg.github-logo{
     padding: 0.5em;
 }
 
-.react-github-permalink, .react-github-issuelink {
+.react-github-permalink,
+.react-github-issuelink {
     border: solid 1px var(--rgp-color-border);
     margin: 0.5em;
     font-size: 12px;
-    border-radius: 4px;   
+    border-radius: 4px;
     text-align: left;
     background-color: var(--rgp-color-bg-stark);
 }
 
 
 
-.react-github-permalink, .react-github-permalink .header {
+.react-github-permalink,
+.react-github-permalink .header {
     border-color: var(--rgp-color-border);
-    border-style: solid; 
-    border-width: 1px; 
+    border-style: solid;
+    border-width: 1px;
 
 }
 
 .react-github-permalink .header {
-    display: flex; 
+    display: flex;
     flex-flow: row nowrap;
     gap: 0.75em;
     align-items: center;
@@ -218,113 +227,116 @@ svg.github-logo{
 
 .copy-button-container {
 
-        .tooltip-container{
-            position: relative;
-            anchor-name: --tooltip-anchor;
+    .tooltip-container {
+        position: relative;
+        anchor-name: --tooltip-anchor;
+    }
+
+    .tooltip-content {
+
+        position: absolute;
+        top: -14px;
+        left: -26px;
+        background-color: var(--rgp-color-tooltip-bg);
+
+        transition-property: opacity;
+        transition-duration: 0.25s;
+        opacity: 1;
+
+        @starting-style {
+            opacity: 0;
         }
 
-        .tooltip-content {
+        @supports(position-anchor: --tooltip-anchor) {
+            position: fixed;
+            position-anchor: --tooltip-anchor;
+            top: unset;
+            left: unset;
+            bottom: anchor(top);
+            justify-self: anchor-center;
+            margin: 3px;
 
-            position: absolute; 
-            top: -14px; 
-            left: -26px;
-            background-color: var(--rgp-color-tooltip-bg);
-
-            transition-property: opacity;
-            transition-duration: 0.25s;
-            opacity: 1;
-
-            @starting-style {
-                opacity: 0;
-            }
-
-            @supports(position-anchor: --tooltip-anchor){
-                position: fixed; 
-                position-anchor: --tooltip-anchor;
-                top:unset; 
-                left: unset;
-                bottom: anchor(top);
-                justify-self: anchor-center;
-                margin: 3px;
-
-            }
-
-
-            height: 12px; 
-     
-            
-            white-space: nowrap;
-            border-radius: 2px; 
-
-            color: var(--rgp-color-text-stark);
-            box-shadow: 2px 2px 2px var(--rgp-color-bg-stark);
-
-            font-size: 11px; 
-            padding: 0.5em 0.75em;
-        }
-
-        .tooltip-target[popover] {
-            overlay: none !important;
-            display: none;
-        }
-
-        .tooltip-target[popover]:popover-open + .tooltip-content {
-            display: block;
-        }
-
-        .tooltip-target[popover] + .tooltip-content {
-            display: none;
         }
 
 
-
-        button {
-            all: unset;
-            /* Remove default styling */
-            appearance: none; 
-            /* Remove specific styling across different browsers */
-            border: none; 
-            /* Remove any border */
-            background: none;
-            /* Remove background */
-            padding: 0;
-            /* Remove default padding */
-            margin: 0;
-            /* Remove default margin */
-            box-shadow: none;
-            /* Remove box shadow */
-            text-align: inherit;
-            /* Inherit text alignment from parent */
-            font: inherit;
-            /* Use parent's font settings */
-            color: inherit;
-            /* Use parent's text color */
-            cursor: pointer;
-            /* Set pointer cursor for better UX */
-            background-color: var(--rgp-color-button-background);
-            border: solid 1px var(--rgp-color-button-border);
-            padding: 0.5em;
-            border-radius: 0.25em;
+        height: 12px;
 
 
-            color: var(--rgp-color-button-text);
+        white-space: nowrap;
+        border-radius: 2px;
 
-            &.clicked {
-                color: var(--rgp-color-button-text-success);
-            }
-            svg {
-                fill: currentColor;
-            }
-            &:hover {
-                background-color: var(--rgp-color-button-background-hover);
-              }
+        color: var(--rgp-color-text-stark);
+        box-shadow: 2px 2px 2px var(--rgp-color-bg-stark);
 
-          }
-          
+        font-size: 11px;
+        padding: 0.5em 0.75em;
+    }
+
+    .tooltip-target[popover] {
+        overlay: none !important;
+        display: none;
+    }
+
+    .tooltip-target[popover]:popover-open+.tooltip-content {
+        display: block;
+    }
+
+    .tooltip-target[popover]+.tooltip-content {
+        display: none;
+    }
+
+
+
+    button {
+        all: unset;
+        /* Remove default styling */
+        appearance: none;
+        /* Remove specific styling across different browsers */
+        border: none;
+        /* Remove any border */
+        background: none;
+        /* Remove background */
+        padding: 0;
+        /* Remove default padding */
+        margin: 0;
+        /* Remove default margin */
+        box-shadow: none;
+        /* Remove box shadow */
+        text-align: inherit;
+        /* Inherit text alignment from parent */
+        font: inherit;
+        /* Use parent's font settings */
+        color: inherit;
+        /* Use parent's text color */
+        cursor: pointer;
+        /* Set pointer cursor for better UX */
+        background-color: var(--rgp-color-button-background);
+        border: solid 1px var(--rgp-color-button-border);
+        padding: 0.5em;
+        border-radius: 0.25em;
+
+
+        color: var(--rgp-color-button-text);
+
+        &.clicked {
+            color: var(--rgp-color-button-text-success);
+        }
+
+        svg {
+            fill: currentColor;
+        }
+
+        &:hover {
+            background-color: var(--rgp-color-button-background-hover);
+        }
+
+    }
+
 }
 
-.react-github-permalink .header, .react-github-issuelink .header{
-    border-width: 0 0 1px 0; 
+.react-github-permalink .header,
+.react-github-issuelink .header {
+    border-width: 0 0 1px 0;
     font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -337,7 +349,7 @@ svg.github-logo{
 }
 
 .react-github-permalink a.commit-link {
-    color:  var(--rgp-color-commit-link);
+    color: var(--rgp-color-commit-link);
     text-decoration: underline;
 }
 
@@ -351,10 +363,10 @@ svg.github-logo{
 
 .react-github-permalink .header {
     background-color: var(--rgp-color-bg-frame);
-    padding: 8px; 
+    padding: 8px;
 
     .link-wrapper {
-        min-width: 0; 
+        min-width: 0;
         overflow: hidden;
         flex: 1 1 auto;
 
@@ -369,28 +381,29 @@ svg.github-logo{
             */
             text-overflow: ellipsis;
             overflow: hidden;
-            display: block; 
+            display: block;
 
         }
     }
 
 }
 
-.react-github-permalink .error, .react-github-issuelink .error {
-    font-weight: bold; 
+.react-github-permalink .error,
+.react-github-issuelink .error {
+    font-weight: bold;
     color: var(--rgp-color-status-error);
     margin-left: 1em;
 }
 
 .reaction-bar {
-    font-size: 0.8em; 
+    font-size: 0.8em;
     margin-top: 0.5em;
 }
 
 .reaction-value {
-    color: var(--rgp-color-reaction-foreground); 
-    background-color: var(--rgp-color-reaction-background); 
-    border: solid 1px var(--rgp-color-reaction-foreground); 
+    color: var(--rgp-color-reaction-foreground);
+    background-color: var(--rgp-color-reaction-background);
+    border: solid 1px var(--rgp-color-reaction-foreground);
     border-radius: 100px;
     display: inline-block;
     margin-right: 0.75em;
@@ -399,4 +412,103 @@ svg.github-logo{
     span {
         margin: 0 2px;
     }
+}
+
+/* Stack Overflow link styles */
+.react-stackoverflow-link {
+    border: 1px solid var(--rgp-color-border);
+    border-radius: 8px;
+    background-color: var(--rgp-color-bg-stark);
+    color: var(--rgp-color-text-stark);
+    font-size: 14px;
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    overflow: hidden;
+}
+
+.react-stackoverflow-inline-vote-count {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--rgp-color-stackoverflow-answer-green);
+    border: solid 1px var(--rgp-color-stackoverflow-answer-green);
+
+    &.answered {
+        background-color: var(--rgp-color-stackoverflow-answer-green);
+        color: white;
+    }
+}
+
+.react-stackoverflow-link a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.react-stackoverflow-link .header {
+    padding: 8px;
+}
+
+.react-stackoverflow-link-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.react-stackoverflow-link-header p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--rgp-color-text-frame);
+}
+
+.react-stackoverflow-link-body {
+    padding: 8px;
+}
+
+.react-stackoverflow-link-title {
+    font-weight: 600;
+    color: var(--rgp-color-stackoverflow-blue);
+    display: block;
+}
+
+.react-stackoverflow-link-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.react-stackoverflow-link-stats .stat-label {
+    color: var(--rgp-color-text-frame);
+}
+
+.react-stackoverflow-link-stats .stat-value {
+    font-weight: 600;
+    color: var(--rgp-color-text-stark);
+}
+
+.react-stackoverflow-link-stats .answered-indicator {
+    color: var(--rgp-color-stackoverflow-answer-green);
+    font-weight: bold;
+}
+
+.react-stackoverflow-link-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.react-stackoverflow-link-tags .tag {
+    background-color: var(--rgp-color-stackoverflow-tag-bg);
+    color: var(--rgp-color-stackoverflow-tag-text);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.react-stackoverflow-link-inline {
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--rgp-color-stackoverflow-blue);
 }

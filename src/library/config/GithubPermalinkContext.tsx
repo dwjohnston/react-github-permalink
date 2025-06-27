@@ -1,7 +1,7 @@
 "use client"
 import { PropsWithChildren, createContext } from "react";
 import { BaseConfiguration } from "./BaseConfiguration";
-import { defaultGetIssueFn } from "./defaultFunctions";
+import { defaultGetIssueFn, defaultGetStackOverflowFn } from "./defaultFunctions";
 import { defaultGetPermalinkFn } from "./defaultFunctions";
 
 // Thanks ChatGPT
@@ -56,6 +56,18 @@ export type GithubIssueLinkDataResponse = {
     }
 } | ErrorResponses;
 
+export type StackOverflowLinkDataResponse = {
+    questionTitle: string;
+    questionId: string;
+    isAnswered: boolean;
+    answerCount: number;
+    score: number;
+    viewCount: number;
+    tags: string[];
+    creationDate: number;
+    status: "ok"
+} | ErrorResponses;
+
 
 
 
@@ -63,12 +75,14 @@ export type GithubIssueLinkDataResponse = {
 export const GithubPermalinkContext = createContext<BaseConfiguration>({
     getDataFn: defaultGetPermalinkFn,
     getIssueFn: defaultGetIssueFn,
+    getStackOverflowFn: defaultGetStackOverflowFn,
 });
 
 export function GithubPermalinkProvider(props: PropsWithChildren<Partial<BaseConfiguration>>) {
     return <GithubPermalinkContext.Provider value={{
         getDataFn: props.getDataFn ?? defaultGetPermalinkFn,
         getIssueFn: props.getIssueFn ?? defaultGetIssueFn,
+        getStackOverflowFn: props.getStackOverflowFn ?? defaultGetStackOverflowFn,
         githubToken: props.githubToken,
         onError: props.onError,
     }}>

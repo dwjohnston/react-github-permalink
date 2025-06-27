@@ -4,6 +4,8 @@ Display Github permalinks as codeblocks.
 
 Display Github issue links. 
 
+Display Stack Overflow question links. 
+
 ![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
 ![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
@@ -27,9 +29,9 @@ This package is compatible with Next 13+ and the components can be used as RSCs 
 
 Three variants of each component are exported
 
- - GithubPermalink/GithubIssueLink - Client component - It fetches the data as on the client in a useEffect. ie. Data won't be retrieved until application has loaded in user's browser.   
- - GithubPermalinkBase/GithubIssueLinkBase - this is the base component - it does no data fetching on its own. 
- - GithubPermalinkRsc/GithubIssueLinkRsc - This is an RSC. 
+ - GithubPermalink/GithubIssueLink/StackOverflowLink - Client component - It fetches the data as on the client in a useEffect. ie. Data won't be retrieved until application has loaded in user's browser.   
+ - GithubPermalinkBase/GithubIssueLinkBase/StackOverflowLinkBase - this is the base component - it does no data fetching on its own. 
+ - GithubPermalinkRsc/GithubIssueLinkRsc/StackOverflowLinkRsc - This is an RSC. 
 
 
 
@@ -112,6 +114,26 @@ export function MyApp() {
 }
 ```
 
+## Stack Overflow Links
+
+### Usage
+```jsx
+import { StackOverflowLink } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <StackOverflowLink questionLink='https://stackoverflow.com/questions/64572466/how-to-use-react-context-in-typescript' />
+}
+```
+
+StackOverflowLink also has an inline variant: 
+
+```jsx
+export function MyApp() {
+    return  <StackOverflowLink questionLink='https://stackoverflow.com/questions/64572466/how-to-use-react-context-in-typescript' variant="inline"/>
+}
+```
+
 ## Rate Limits and Authentication
 
 By default the components make unauthenticated requests against Github's API. The rate limit for such requests is 60/hour and only publicly visible repositories are available. 
@@ -126,6 +148,7 @@ The global configuration object has this signature
 type BaseConfiguration = {
     getDataFn: (permalink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubPermalinkDataResponse>;
     getIssueFn: (issueLink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubIssueLinkDataResponse>;
+    getStackOverflowFn: (questionLink: string, onError?: ((err: unknown) => void) | undefined) => Promise<StackOverflowLinkDataResponse>;
     githubToken: string | undefined;
     onError: ((e: unknown) => void) | undefined;
 }
