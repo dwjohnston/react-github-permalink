@@ -1,17 +1,17 @@
 "use client"
 
-import {  useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import {  GithubPermalinkContext, StackOverflowLinkDataResponse } from "../config/GithubPermalinkContext";
+import { GithubPermalinkContext, StackOverflowLinkDataResponse } from "../config/GithubPermalinkContext";
 import { StackOverflowLinkBase, StackOverflowLinkBaseProps } from "./StackOverflowLinkBase";
 
 type StackOverflowLinkProps = Omit<StackOverflowLinkBaseProps, "data">;
 
 export function StackOverflowLink(props: StackOverflowLinkProps) {
 
-  const { questionLink } = props;
+  const { stackoverflowLink: questionLink } = props;
   const [data, setData] = useState(null as null | StackOverflowLinkDataResponse)
-  const { getStackOverflowFn, onError} = useContext(GithubPermalinkContext);
+  const { getStackOverflowFn, onError } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -28,6 +28,6 @@ export function StackOverflowLink(props: StackOverflowLinkProps) {
     throw new Error("Loading is complete, but no data was returned.")
   }
 
-  return <StackOverflowLinkBase {...props} data={data}/>
+  return <StackOverflowLinkBase {...props} data={data} />
 
 }

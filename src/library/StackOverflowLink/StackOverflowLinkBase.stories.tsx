@@ -37,23 +37,42 @@ const mockErrorData = {
 
 export const Default: Story = {
   args: {
-    questionLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
+    stackoverflowLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
     data: mockSuccessData,
     variant: 'block',
   },
 };
 
+export const WithTags: Story = {
+  args: {
+    stackoverflowLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
+    data: mockSuccessData,
+    variant: 'block',
+    showTags: true
+  },
+};
+
+
 export const Inline: Story = {
   args: {
-    questionLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
+    stackoverflowLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
     data: mockSuccessData,
     variant: 'inline',
   },
 };
 
+export const InlineError: Story = {
+  args: {
+    stackoverflowLink: 'https://stackoverflow.com/questions/123456/how-to-create-react-component',
+    data: mockErrorData,
+    variant: 'inline',
+  },
+};
+
+
 export const NotFound: Story = {
   args: {
-    questionLink: 'https://stackoverflow.com/questions/999999/non-existent-question',
+    stackoverflowLink: 'https://stackoverflow.com/questions/999999/non-existent-question',
     data: mockErrorData,
     variant: 'block',
   },
@@ -61,7 +80,7 @@ export const NotFound: Story = {
 
 export const Unanswered: Story = {
   args: {
-    questionLink: 'https://stackoverflow.com/questions/789012/unanswered-question',
+    stackoverflowLink: 'https://stackoverflow.com/questions/789012/unanswered-question',
     data: {
       ...mockSuccessData,
       questionTitle: 'How to solve this complex problem?',

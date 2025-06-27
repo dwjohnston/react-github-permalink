@@ -1,6 +1,6 @@
 import { GithubPermalinkDataResponse, } from "../config/GithubPermalinkContext";
 import { ErrorMessages } from "../ErrorMessages/ErrorMessages";
-import { GithubSvg } from "../GithubSvg/GithubSvg";
+import { GithubSvg } from "../images/GithubSvg/GithubSvg";
 import { PropsWithChildren } from "react";
 import { SyntaxHighlight } from "../SyntaxHighlight/SyntaxHighlight";
 import { formatForLineExclusions } from "./formatLineExclusions";
@@ -34,32 +34,32 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
             return acc + "\n" + cur.lines.join("\n");
         }, '')
-        return <GithubPermalinkInner {...props} clipboard={clipboard} header={<>
+        return <GithubPermalinkFrame {...props} clipboard={clipboard} header={<>
             <a href={permalink} className="file-link">{`${data.owner}/${data.repo}/${data.path}`}</a>
             <p>{data.lineFrom === data.lineTo ? <>Line {data.lineFrom}</> : <>Lines {data.lineFrom} to {data.lineTo}</>} in <a className="commit-link" href={data.commitUrl}>{data.commit.slice(0, 7)}</a></p>
         </>}>
 
             {formatedLineExclusions.map((v) => {
                 if (v.isExclude) {
-                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} key={v.from}/>
+                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} key={v.from} />
 
                 }
 
-                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} key={v.from}/>
+                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} key={v.from} />
 
             })}
 
-        </GithubPermalinkInner>
+        </GithubPermalinkFrame>
 
     }
 
-    return <GithubPermalinkInner {...props}>
+    return <GithubPermalinkFrame {...props}>
         <ErrorMessages data={data} />
-    </GithubPermalinkInner>
+    </GithubPermalinkFrame>
 }
 
 
-function GithubPermalinkInner(props: PropsWithChildren<{
+function GithubPermalinkFrame(props: PropsWithChildren<{
     header?: React.ReactNode
     clipboard?: string;
 } & GithubPermalinkBaseProps>) {
