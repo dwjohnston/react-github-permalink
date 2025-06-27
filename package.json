@@ -12,7 +12,7 @@
   },
   "scripts": {
     "next:dev": "next dev",
-    "next:build": "next build",
+    "next:build": "npm run build-storybook && next build",
     "next:start": "next start",
     "next:lint": "next lint",
     "test": "vitest",
