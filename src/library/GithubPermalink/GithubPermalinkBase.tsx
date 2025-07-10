@@ -6,6 +6,7 @@ import { SyntaxHighlight } from "../SyntaxHighlight/SyntaxHighlight";
 import { formatForLineExclusions } from "./formatLineExclusions";
 import { CopySvg } from "../images/CopySvg";
 import { CopyButton } from "../common/CopyButton/CopyButton";
+import { getLanguageFromPath } from "../utils/getLanguageFromPath";
 
 export type GithubPermalinkBaseProps = {
     className?: string;
@@ -26,6 +27,7 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
     if (data.status === "ok") {
 
         const formatedLineExclusions = formatForLineExclusions(data, excludeLines);
+        const language = getLanguageFromPath(data.path);
 
         const clipboard = formatedLineExclusions.reduce((acc, cur) => {
             if (cur.isExclude) {
@@ -41,11 +43,11 @@ export function GithubPermalinkBase(props: GithubPermalinkBaseProps) {
 
             {formatedLineExclusions.map((v) => {
                 if (v.isExclude) {
-                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} key={v.from}/>
+                    return <SyntaxHighlight className="hide-line-numbers" text={excludeText} startingLineNumber={v.from} language={language} key={v.from}/>
 
                 }
 
-                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} key={v.from}/>
+                return <SyntaxHighlight text={v.lines.join("\n")} startingLineNumber={v.from} language={language} key={v.from}/>
 
             })}
 

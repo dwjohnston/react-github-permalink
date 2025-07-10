@@ -126,9 +126,10 @@ export function SyntaxHighlight(props: {
     text: string;
     startingLineNumber?: number;
     className?: string; 
+    language?: string;
 }) {
 
-    const { startingLineNumber, text, className } = props;
+    const { startingLineNumber, text, className, language = "javascript" } = props;
 
     const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
 
@@ -141,6 +142,6 @@ export function SyntaxHighlight(props: {
     }, [])
 
 
-    return <ReactSyntaxHighlighter className={className} style={ready ? isDarkMode ? tomorrowNight : github : noTheme} language="javascript" showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</ReactSyntaxHighlighter>
+    return <ReactSyntaxHighlighter className={className} style={ready ? isDarkMode ? tomorrowNight : github : noTheme} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</ReactSyntaxHighlighter>
 
 }
