@@ -1,9 +1,10 @@
 import { BaseConfiguration } from "./BaseConfiguration";
-import { defaultGetIssueFn, defaultGetPermalinkFn } from "./defaultFunctions";
+import { defaultGetIssueFn, defaultGetPermalinkFn, defaultGetPRFn } from "./defaultFunctions";
 
 const defaultConfiguration = {
   getDataFn: defaultGetPermalinkFn,
   getIssueFn: defaultGetIssueFn,
+  getPRFn: defaultGetPRFn,
 };
 
 class GithubPermalinkRscConfig {
@@ -21,6 +22,10 @@ class GithubPermalinkRscConfig {
 
   public getIssueFn() {
     return this.baseConfiguration.getIssueFn;
+  }
+
+  public getPRFn() {
+    return this.baseConfiguration.getPRFn;
   }
 
   public getGithubToken() {

@@ -4,6 +4,8 @@ Display Github permalinks as codeblocks.
 
 Display Github issue links. 
 
+Display Github PR links. 
+
 ![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
 ![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
@@ -27,9 +29,9 @@ This package is compatible with Next 13+ and the components can be used as RSCs 
 
 Three variants of each component are exported
 
- - GithubPermalink/GithubIssueLink - Client component - It fetches the data as on the client in a useEffect. ie. Data won't be retrieved until application has loaded in user's browser.   
- - GithubPermalinkBase/GithubIssueLinkBase - this is the base component - it does no data fetching on its own. 
- - GithubPermalinkRsc/GithubIssueLinkRsc - This is an RSC. 
+ - GithubPermalink/GithubIssueLink/GithubPRLink - Client component - It fetches the data as on the client in a useEffect. ie. Data won't be retrieved until application has loaded in user's browser.   
+ - GithubPermalinkBase/GithubIssueLinkBase/GithubPRLinkBase - this is the base component - it does no data fetching on its own. 
+ - GithubPermalinkRsc/GithubIssueLinkRsc/GithubPRLinkRsc - This is an RSC. 
 
 
 
@@ -112,6 +114,72 @@ export function MyApp() {
 }
 ```
 
+## Github PR Link
+
+### Usage
+```jsx
+import { GithubPRLink } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <GithubPRLink prLink='https://github.com/facebook/react/pull/24652' />,
+}
+```
+
+PR Link also has an inline variant: 
+
+```jsx
+export function MyApp() {
+    return  <GithubPRLink prLink='https://github.com/facebook/react/pull/24652' variant="inline"/>,
+}
+```
+
+### PR Link with custom data
+
+```jsx
+import { GithubPRLinkBase } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <GithubPRLinkBase
+        prLink="https://github.com/facebook/react/pull/24652"
+        data={{
+            prTitle: "Add concurrent features to React",
+            prNumber: "24652",
+            prState: "closed",
+            owner: "facebook",
+            repo: "react",
+            status: "ok",
+            isDraft: false,
+            merged: true,
+            mergeable: null,
+            reactions: {
+                "+1": 42,
+                "-1": 0,
+                confused: 0,
+                eyes: 2,
+                heart: 8,
+                hooray: 15,
+                laugh: 0,
+                rocket: 5,
+                total_count: 72
+            }
+        }}
+    />
+}
+```
+
+### PR Link RSC
+
+```jsx
+import { GithubPRLinkRsc } from 'react-github-permalink/dist/rsc';
+import "react-github-permalink/dist/github-permalink.css"; // Or provide your own styles
+
+export function MyApp() {
+    return  <GithubPRLinkRsc prLink="https://github.com/facebook/react/pull/24652"/>
+}
+```
+
 ## Rate Limits and Authentication
 
 By default the components make unauthenticated requests against Github's API. The rate limit for such requests is 60/hour and only publicly visible repositories are available. 
@@ -126,6 +194,7 @@ The global configuration object has this signature
 type BaseConfiguration = {
     getDataFn: (permalink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubPermalinkDataResponse>;
     getIssueFn: (issueLink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubIssueLinkDataResponse>;
+    getPRFn: (prLink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubPRLinkDataResponse>;
     githubToken: string | undefined;
     onError: ((e: unknown) => void) | undefined;
 }
@@ -136,7 +205,7 @@ type BaseConfiguration = {
 Client components are configured via context provider: 
 
 ```tsx
-import { GithubPermalink, GithubIssueLink GithubPermalinkProvider,  } from 'react-github-permalink';
+import { GithubPermalink, GithubIssueLink, GithubPRLink, GithubPermalinkProvider } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
@@ -146,6 +215,9 @@ export function MyApp() {
         }}
         getIssueFn={(issueLink: string) => {
             // Your implementation to retrieve issue links here
+        }}
+        getPRFn={(prLink: string) => {
+            // Your implementation to retrieve PR links here
         }}
 
         // Don't put a put a github token into the context provider in production! It will visible for all the world to see!
@@ -158,6 +230,7 @@ export function MyApp() {
     >  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
         <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />
+        <GithubPRLink prLink='https://github.com/facebook/react/pull/24652' />
     </GithubPermalinkProvider>
 }    
 ```

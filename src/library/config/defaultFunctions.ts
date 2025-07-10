@@ -1,5 +1,5 @@
-import { GithubIssueLinkDataResponse } from "./GithubPermalinkContext";
-import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParsers";
+import { GithubIssueLinkDataResponse, GithubPRLinkDataResponse } from "./GithubPermalinkContext";
+import { parseGithubIssueLink, parseGithubPermalinkUrl, parseGithubPRLink } from "../utils/urlParsers";
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
 
@@ -34,6 +34,38 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         owner: config.owner,
         repo: config.repo, 
         reactions: issueJson.reactions,
+    };
+}
+
+export async function defaultGetPRFn(prLink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPRLinkDataResponse> {
+    const config = parseGithubPRLink(prLink);
+
+    const options = githubToken ? {
+        headers: {
+            Authorization: `Bearer ${githubToken}`
+        }
+    } : undefined;
+
+    const prResult = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/pulls/${config.pr}`, options);
+
+    if (!prResult.ok) {
+        onError?.(prResult);
+        return handleResponse(prResult);
+    }
+
+    const prJson = await prResult.json();
+
+    return {
+        prTitle: prJson.title,
+        prNumber: config.pr,
+        prState: prJson.state,
+        status: "ok",
+        owner: config.owner,
+        repo: config.repo,
+        isDraft: prJson.draft,
+        merged: prJson.merged,
+        mergeable: prJson.mergeable,
+        reactions: prJson.reactions,
     };
 }export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
     const config = parseGithubPermalinkUrl(permalink);
