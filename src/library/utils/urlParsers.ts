@@ -36,3 +36,15 @@ export function parseGithubIssueLink(url: string): { owner: string, repo: string
         throw new Error("Invalid issue link URL");    
     }
 }
+
+export function parseGithubRepositoryLink(url: string): { owner: string, repo: string } {
+    const regex = /^https?:\/\/github\.com\/([^/]+)\/([^/]+)(?:\/.*)?$/;
+    const match = url.match(regex);
+
+    if (match) {
+        const [, owner, repo] = match;
+        return { owner, repo };
+    } else {
+        throw new Error("Invalid repository link URL");    
+    }
+}

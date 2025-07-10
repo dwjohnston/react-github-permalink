@@ -400,3 +400,70 @@ svg.github-logo{
         margin: 0 2px;
     }
 }
+
+/* Repository Link Styles */
+.react-github-repository-link {
+    border: 1px solid var(--rgp-color-border);
+    border-radius: 6px;
+    background-color: var(--rgp-color-bg-stark);
+    color: var(--rgp-color-text-stark);
+    font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    padding: 16px;
+    margin: 8px 0;
+}
+
+.react-github-repository-link-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.react-github-repository-link-repo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.react-github-repository-link-name {
+    color: var(--rgp-color-file-link);
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.react-github-repository-link-name:hover {
+    text-decoration: underline;
+}
+
+.react-github-repository-link-stats {
+    display: flex;
+    gap: 16px;
+    color: var(--rgp-color-text-frame);
+    font-size: 14px;
+}
+
+.react-github-repository-link-description {
+    color: var(--rgp-color-text-frame);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.react-github-repository-link-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--rgp-color-file-link);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.react-github-repository-link-inline:hover {
+    text-decoration: underline;
+}
+
+.react-github-repository-link-counts {
+    margin-left: 8px;
+    color: var(--rgp-color-text-frame);
+    font-size: 12px;
+}

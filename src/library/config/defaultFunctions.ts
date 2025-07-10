@@ -1,5 +1,5 @@
-import { GithubIssueLinkDataResponse } from "./GithubPermalinkContext";
-import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParsers";
+import { GithubIssueLinkDataResponse, GithubRepositoryLinkDataResponse } from "./GithubPermalinkContext";
+import { parseGithubIssueLink, parseGithubPermalinkUrl, parseGithubRepositoryLink } from "../utils/urlParsers";
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
 
@@ -76,6 +76,37 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         status: "ok"
     };
 }
+export async function defaultGetRepositoryFn(repositoryLink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubRepositoryLinkDataResponse> {
+    const config = parseGithubRepositoryLink(repositoryLink);
+
+    const options = githubToken ? {
+        headers: {
+            Authorization: `Bearer ${githubToken}`
+        }
+    } : undefined;
+
+    const repositoryResult = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, options);
+
+    if (!repositoryResult.ok) {
+        onError?.(repositoryResult);
+        return handleResponse(repositoryResult);
+    }
+
+    const repositoryJson = await repositoryResult.json();
+
+    return {
+        owner: config.owner,
+        repo: config.repo,
+        name: repositoryJson.name,
+        fullName: repositoryJson.full_name,
+        description: repositoryJson.description,
+        stargazersCount: repositoryJson.stargazers_count,
+        forksCount: repositoryJson.forks_count,
+        htmlUrl: repositoryJson.html_url,
+        status: "ok"
+    };
+}
+
 export function handleResponse(response: Response): ErrorResponses {
     if (response.status === 404) {
         return { status: "404" };
