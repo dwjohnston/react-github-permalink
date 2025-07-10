@@ -191,7 +191,79 @@ svg.github-logo{
     padding: 0.5em;
 }
 
-.react-github-permalink, .react-github-issuelink {
+/* PR Link Styles */
+.react-github-prlink .react-github-prlink-body {
+    padding: 0.5em;
+    border-bottom: solid 1px var(--rgp-color-border);
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    padding-left: 0;
+}
+
+.react-github-prlink-body p {
+    margin: 0.5em 0;
+}
+
+.react-github-prlink a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.react-github-prlink a:hover .react-github-prlink-title,
+ .react-github-prlink a:hover .react-github-prlink-number  {
+    text-decoration: underline;
+}
+
+.react-github-prlink-number {
+    color: var(--rgp-color-issuenumber);
+}
+
+.react-github-prlink-repo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background-color: var(--rgp-color-bg-frame);
+    padding: 0.5em;
+    color: var(--rgp-color-text-frame);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.react-github-prlink-status  {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background-color: var(--rgp-color-bg-frame);
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--rgp-color-status-foreground);
+    display: inline-flex;
+    margin-top: 0.5em;
+}
+
+.react-github-prlink-status.open {
+    background-color: var(--rgp-color-status-open);
+}
+
+.react-github-prlink-status.closed {
+    background-color: var(--rgp-color-status-closed);
+}
+
+.react-github-prlink-status.merged {
+    background-color: rgb(130, 80, 223);
+}
+
+.react-github-prlink-status.draft {
+    background-color: rgb(101, 109, 118);
+}
+
+.react-github-prlink {
+    padding: 0.5em;
+}
+
+.react-github-permalink, .react-github-issuelink, .react-github-prlink {
     border: solid 1px var(--rgp-color-border);
     margin: 0.5em;
     font-size: 12px;
@@ -323,7 +395,7 @@ svg.github-logo{
           
 }
 
-.react-github-permalink .header, .react-github-issuelink .header{
+.react-github-permalink .header, .react-github-issuelink .header, .react-github-prlink .header{
     border-width: 0 0 1px 0; 
     font-family: "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
@@ -376,7 +448,7 @@ svg.github-logo{
 
 }
 
-.react-github-permalink .error, .react-github-issuelink .error {
+.react-github-permalink .error, .react-github-issuelink .error, .react-github-prlink .error {
     font-weight: bold; 
     color: var(--rgp-color-status-error);
     margin-left: 1em;

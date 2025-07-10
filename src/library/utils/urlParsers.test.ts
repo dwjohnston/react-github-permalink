@@ -1,5 +1,5 @@
 import { expect, test, it, describe } from 'vitest'
-import { parseGithubPermalinkUrl } from "./urlParsers";
+import { parseGithubPermalinkUrl, parseGithubPRLink } from "./urlParsers";
 
 describe(parseGithubPermalinkUrl, () => {
     it("behaves correctly for correct urls", () => {
@@ -31,4 +31,46 @@ describe(parseGithubPermalinkUrl, () => {
             "repo": "react-github-permalink",
         })
     })
+});
+
+describe(parseGithubPRLink, () => {
+    it("behaves correctly for correct PR URLs", () => {
+        expect(
+            parseGithubPRLink(
+                "https://github.com/facebook/react/pull/24652"
+            )
+        ).toEqual(
+            {
+                "owner": "facebook",
+                "repo": "react",
+                "pr": "24652",
+            }
+        );
+    });
+
+    it("behaves correctly for http PR URLs", () => {
+        expect(
+            parseGithubPRLink(
+                "http://github.com/facebook/react/pull/12345"
+            )
+        ).toEqual(
+            {
+                "owner": "facebook",
+                "repo": "react",
+                "pr": "12345",
+            }
+        );
+    });
+
+    it("throws error for issue URLs", () => {
+        expect(() => parseGithubPRLink(
+            "https://github.com/facebook/react/issues/24652"
+        )).toThrow("Invalid PR link URL");
+    });
+
+    it("throws error for invalid URLs", () => {
+        expect(() => parseGithubPRLink(
+            "https://github.com/facebook/react/blob/main/src/index.js"
+        )).toThrow("Invalid PR link URL");
+    });
 });
