@@ -4,6 +4,74 @@ Display Github permalinks as codeblocks.
 
 Display Github issue links. 
 
+Display browser compatibility tables from caniuse.com.
+
+![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
+![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
+![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
+![screenshot of the tool in action - light mode ](./screenshot-issuelink-light.png)
+![screenshot of the tool in action - dark mode - inline ](./screenshot-issuelink-inline-dark.png)
+![screenshot of the tool in action - light mode - inline ](./screenshot-issuelink-inline-light.png)
+
+## CaniuseLink Component
+
+The CaniuseLink component displays live browser compatibility tables for web features using data from caniuse.com. It shows support across different browsers and versions with color-coded indicators.
+
+### Basic Usage
+
+```jsx
+import { CaniuseLink } from 'react-github-permalink';
+import "react-github-permalink/dist/github-permalink.css";
+
+export function MyApp() {
+    return <CaniuseLink feature="flexbox" />
+}
+```
+
+### Inline Usage
+
+```jsx
+<p>This layout uses <CaniuseLink feature="flexbox" variant="inline" /> for positioning.</p>
+```
+
+### With Custom Data
+
+```jsx
+import { CaniuseLinkBase } from 'react-github-permalink';
+
+const customData = {
+    title: "CSS Flexible Box Layout Module",
+    description: "Method of positioning elements...",
+    stats: {
+        chrome: { "89": "y", "90": "y" },
+        firefox: { "84": "y", "85": "y" },
+        safari: { "14.0": "y", "14.1": "y" },
+        edge: { "89": "y", "90": "y" },
+        ie: { "8": "n", "9": "n", "10": "a x", "11": "a" }
+    },
+    status: "ok"
+};
+
+export function MyApp() {
+    return <CaniuseLinkBase feature="flexbox" data={customData} />
+}
+```
+
+### RSC Usage
+
+```jsx
+import { CaniuseLinkRsc } from 'react-github-permalink/dist/rsc';
+
+export function MyApp() {
+    return <CaniuseLinkRsc feature="flexbox" />
+}
+```
+
+The component fetches live data from the caniuse GitHub repository, ensuring up-to-date compatibility information. Support levels are color-coded:
+- **Green**: Fully supported
+- **Yellow**: Partial support  
+- **Red**: Not supported 
+
 ![screenshot of the tool in action - dark mode ](./screenshot-permalink-dark.png)
 ![screenshot of the tool in action - light mode ](./screenshot-permalink-light.png)
 ![screenshot of the tool in action - dark mode ](./screenshot-issuelink-dark.png)
@@ -126,6 +194,7 @@ The global configuration object has this signature
 type BaseConfiguration = {
     getDataFn: (permalink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubPermalinkDataResponse>;
     getIssueFn: (issueLink: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<GithubIssueLinkDataResponse>;
+    getCaniuseFn: (feature: string, githubToken?: string | undefined, onError?: ((err: unknown) => void) | undefined) => Promise<CaniuseLinkDataResponse>;
     githubToken: string | undefined;
     onError: ((e: unknown) => void) | undefined;
 }
@@ -136,21 +205,24 @@ type BaseConfiguration = {
 Client components are configured via context provider: 
 
 ```tsx
-import { GithubPermalink, GithubIssueLink GithubPermalinkProvider,  } from 'react-github-permalink';
+import { GithubPermalink, GithubIssueLink, CaniuseLink, GithubPermalinkProvider } from 'react-github-permalink';
 import "react-github-permalink/dist/github-permalink.css";
 
 export function MyApp() {
     return <GithubPermalinkProvider 
-        getDataFn ={(permalink: string) => {
+        getDataFn={(permalink: string) => {
             // Your implementation to retrieve permalinks here 
         }}
         getIssueFn={(issueLink: string) => {
             // Your implementation to retrieve issue links here
         }}
+        getCaniuseFn={(feature: string) => {
+            // Your implementation to retrieve caniuse data here
+        }}
 
-        // Don't put a put a github token into the context provider in production! It will visible for all the world to see!
+        // Don't put a github token into the context provider in production! It will be visible for all the world to see!
         // Instead you will need to expose a data fetching function on the backend to do it for you 
-        githubToken={process.env.NODE_ENV='development' && process.env.MY_GITHUB_TOKEN}
+        githubToken={process.env.NODE_ENV === 'development' && process.env.MY_GITHUB_TOKEN}
 
         onError={(err) => {
             Sentry.captureException(err);
@@ -158,6 +230,7 @@ export function MyApp() {
     >  
         <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5"/>
         <GithubIssueLink issueLink='https://github.com/dwjohnston/react-github-permalink/issues/2' />
+        <CaniuseLink feature="flexbox" />
     </GithubPermalinkProvider>
 }    
 ```
