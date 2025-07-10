@@ -131,7 +131,7 @@ export function SyntaxHighlight(props: {
     language?: AvailableLanguagesPrism
 }) {
 
-    const { startingLineNumber, text, className } = props;
+    const { startingLineNumber, text, className, language = "javascript" } = props;
 
     const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
 
