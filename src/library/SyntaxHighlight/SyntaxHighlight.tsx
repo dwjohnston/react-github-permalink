@@ -125,7 +125,7 @@ const noTheme = {
 export function SyntaxHighlight(props: {
     text: string;
     startingLineNumber?: number;
-    className?: string; 
+    className?: string;
 }) {
 
     const { startingLineNumber, text, className } = props;
@@ -141,6 +141,6 @@ export function SyntaxHighlight(props: {
     }, [])
 
 
-    return <ReactSyntaxHighlighter className={className} style={ready ? isDarkMode ? tomorrowNight : github : noTheme} language="javascript" showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</ReactSyntaxHighlighter>
+    return <ReactSyntaxHighlighter className={className} style={ready ? isDarkMode ? tomorrowNight : github : noTheme} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</ReactSyntaxHighlighter>
 
 }
