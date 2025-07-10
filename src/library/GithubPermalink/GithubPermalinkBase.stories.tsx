@@ -89,6 +89,30 @@ schemas.forEach(function (schema) {
   })
 `
 
+const reactTsxCode = `
+export function ChildrenStyleOne() {
+    const [value, setValue] = React.useState(0)
+    return <div className="some-parent-component">
+        <button onClick={() => {
+            setValue((prev) => prev + 1);;
+        }}>Increase count: {value}</button>
+        {/* ò      Here we declare the RenderTracker directly in the component */}
+        <RenderTracker />
+    </div>
+}
+
+export function ChildrenStyleTwo(props: React.PropsWithChildren) {
+    const [value, setValue] = React.useState(0)
+    return <div className="some-parent-component">
+        <button onClick={() => {
+            setValue((prev) => prev + 1);;
+        }}>Increase count: {value}</button>
+        {/* ò      Here, it is passed from the parent via the 'children' prop */}
+        {props.children}
+    </div>
+}
+`
+
 export const WithLineExclusionsRealCode: Story = {
     render: () => (
         <GithubPermalinkBase
@@ -107,6 +131,25 @@ export const WithLineExclusionsRealCode: Story = {
             excludeLines={[[105, 107]]}
             excludeText="// snip"
             
+            />
+    ),
+};
+
+export const ReactTsxSyntaxHighlighting: Story = {
+    render: () => (
+        <GithubPermalinkBase
+            permalink="https://github.com/dwjohnston/blacksheepcode/blob/45fdceb/src/demos/react-renders/ReactRenders3.tsx#L8-L28"
+            data={{
+                lines: reactTsxCode.split('\n'),
+                lineFrom: 8,
+                lineTo: 28,
+                commit: "45fdceb",
+                path: "src/demos/react-renders/ReactRenders3.tsx",
+                owner: "dwjohnston",
+                repo: "blacksheepcode",
+                commitUrl: "https://github.com/dwjohnston/blacksheepcode/commit/45fdceb",
+                status: "ok"
+            }} 
             />
     ),
 };
