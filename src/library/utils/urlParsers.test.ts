@@ -1,5 +1,5 @@
 import { expect, test, it, describe } from 'vitest'
-import { parseGithubPermalinkUrl } from "./urlParsers";
+import { parseGithubPermalinkUrl, parseGithubRepositoryLink } from "./urlParsers";
 
 describe(parseGithubPermalinkUrl, () => {
     it("behaves correctly for correct urls", () => {
@@ -31,4 +31,33 @@ describe(parseGithubPermalinkUrl, () => {
             "repo": "react-github-permalink",
         })
     })
+});
+
+describe(parseGithubRepositoryLink, () => {
+    it("behaves correctly for repository URLs", () => {
+        expect(
+            parseGithubRepositoryLink("https://github.com/dwjohnston/react-github-permalink")
+        ).toEqual({
+            "owner": "dwjohnston",
+            "repo": "react-github-permalink",
+        });
+    });
+
+    it("behaves correctly for repository URLs with trailing paths", () => {
+        expect(
+            parseGithubRepositoryLink("https://github.com/dwjohnston/react-github-permalink/tree/main")
+        ).toEqual({
+            "owner": "dwjohnston",
+            "repo": "react-github-permalink",
+        });
+    });
+
+    it("behaves correctly for repository URLs with trailing slash", () => {
+        expect(
+            parseGithubRepositoryLink("https://github.com/dwjohnston/react-github-permalink/")
+        ).toEqual({
+            "owner": "dwjohnston",
+            "repo": "react-github-permalink",
+        });
+    });
 });

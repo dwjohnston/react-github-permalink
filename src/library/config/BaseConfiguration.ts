@@ -1,5 +1,6 @@
 import { defaultGetPermalinkFn } from "./defaultFunctions";
 import { defaultGetIssueFn } from "./defaultFunctions";
+import { defaultGetRepositoryFn } from "./defaultFunctions";
 
 
 export type BaseConfiguration = {
@@ -10,6 +11,9 @@ export type BaseConfiguration = {
     
     /** Function to provide issue data payload */
     getIssueFn: typeof defaultGetIssueFn;
+
+    /** Function to provide repository data payload */
+    getRepositoryFn: typeof defaultGetRepositoryFn;
 
     /**
      * A github personal access token - will be passed to the data fetching functions
