@@ -2,6 +2,7 @@ import { GithubIssueLinkDataResponse } from "./GithubPermalinkContext";
 import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParsers";
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
+import { CaniuseLinkDataResponse } from "./GithubPermalinkContext";
 
 
 export async function defaultGetIssueFn(issueLink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubIssueLinkDataResponse> {
@@ -95,5 +96,30 @@ export function handleResponse(response: Response): ErrorResponses {
     return {
         status: "other-error"
     };
+}
+
+export async function defaultGetCaniuseFn(feature: string, _githubToken?: string, onError?: (err: unknown) => void): Promise<CaniuseLinkDataResponse> {
+    try {
+        const response = await fetch(`https://raw.githubusercontent.com/Fyrd/caniuse/main/features-json/${feature}.json`);
+        
+        if (!response.ok) {
+            onError?.(response);
+            return handleResponse(response);
+        }
+
+        const data = await response.json();
+        
+        return {
+            title: data.title,
+            description: data.description,
+            stats: data.stats,
+            status: "ok"
+        };
+    } catch (error) {
+        onError?.(error);
+        return {
+            status: "other-error"
+        };
+    }
 }
 
