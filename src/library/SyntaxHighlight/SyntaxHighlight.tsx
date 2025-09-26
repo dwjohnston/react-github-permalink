@@ -129,7 +129,7 @@ export function SyntaxHighlight(props: {
     language?: string;
 }) {
 
-    const { startingLineNumber, text, className, language = "javascript" } = props;
+    const { startingLineNumber, text, className } = props;
 
     const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
 
