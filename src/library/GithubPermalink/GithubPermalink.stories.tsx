@@ -36,6 +36,16 @@ export const DifferentLanguages: Story = {
 
     <p>TSX</p>
     <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/242681a9df549adcc9a7fca0d8421d98b7e312c4/sample_files/sample1.tsx#L1-L11" />
+
+    <p>Docker file</p>
+    <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/bd98ef231beeb18ed77207216464fc8e454dd721/sample_files/sample.dockerfile#L1-L20" />
+
+    <p>XML</p>
+    <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/bd98ef231beeb18ed77207216464fc8e454dd721/sample_files/sample.xml#L1-L15" />
+
+    <p>HTML</p>
+    <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/bd98ef231beeb18ed77207216464fc8e454dd721/sample_files/sample.html#L1-L19" />
+
   </div>
   ),
 };

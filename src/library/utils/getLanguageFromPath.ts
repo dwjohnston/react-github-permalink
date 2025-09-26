@@ -85,6 +85,6 @@ export function getLanguageFromPath(filePath: string): AvailableLanguagesPrism {
         case 'vim':
             return 'vim';
         default:
-            return 'javascript'; // fallback to javascript for unknown extensions
+            return 'text'; // fallback to javascript for unknown extensions
     }
 }

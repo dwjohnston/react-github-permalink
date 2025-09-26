@@ -51,11 +51,11 @@ describe('getLanguageFromPath', () => {
     });
 
     it('should return javascript as fallback for unknown extensions', () => {
-        expect(getLanguageFromPath('file.unknown')).toBe('javascript');
+        expect(getLanguageFromPath('file.unknown')).toBe('text');
     });
 
     it('should return javascript as fallback for files without extension', () => {
-        expect(getLanguageFromPath('README')).toBe('javascript');
+        expect(getLanguageFromPath('asdf')).toBe('text');
     });
 
     it('should handle paths with multiple dots', () => {

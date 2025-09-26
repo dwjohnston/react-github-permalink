@@ -275,4 +275,8 @@ export type AvailableLanguagesPrism =
     | "xquery"
     | "yaml"
     | "yang"
-    | "zig";
+    | "zig"
+    | "xml"
+    | "html"
+    | "dockerfile"
+    | "text";

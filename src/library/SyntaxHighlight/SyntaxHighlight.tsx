@@ -131,7 +131,7 @@ export function SyntaxHighlight(props: {
     language?: AvailableLanguagesPrism
 }) {
 
-    const { startingLineNumber, text, className, language = "javascript" } = props;
+    const { startingLineNumber, text, className, language } = props;
 
     const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
 
@@ -144,6 +144,6 @@ export function SyntaxHighlight(props: {
     }, [])
 
 
-    return <SyntaxHighlighter className={className} style={ready ? isDarkMode ? oneDark : oneLight : noTheme} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</SyntaxHighlighter>
+    return <SyntaxHighlighter className={className} style={ready ? isDarkMode ? oneDark : oneLight : {}} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</SyntaxHighlighter>
 
 }
