@@ -32,10 +32,10 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         issueState: issueJson.state,
         status: "ok",
         owner: config.owner,
-        repo: config.repo, 
+        repo: config.repo,
         reactions: issueJson.reactions,
     };
-}export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
+} export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
     const config = parseGithubPermalinkUrl(permalink);
 
 
@@ -61,7 +61,7 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
     }
 
     const [contentJson, commitJson] = await Promise.all([contentResult.json(), commitResult.json()]);
-    const content = atob(contentJson.content);
+    const content = decodeURIComponent(escape(atob(contentJson.content)));
     const lines = content.split("\n");
 
     return {
@@ -76,6 +76,9 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         status: "ok"
     };
 }
+
+
+
 export function handleResponse(response: Response): ErrorResponses {
     if (response.status === 404) {
         return { status: "404" };
@@ -87,7 +90,7 @@ export function handleResponse(response: Response): ErrorResponses {
         };
     }
 
-    if(response.status === 401) {
+    if (response.status === 401) {
         return {
             status: "unauthorized"
         }
