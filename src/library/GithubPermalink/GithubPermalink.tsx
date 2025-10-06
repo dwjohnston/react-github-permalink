@@ -1,11 +1,10 @@
 "use client"
 
-import {useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GithubPermalinkDataResponse, GithubPermalinkContext } from "../config/GithubPermalinkContext";
-import { useMediaQuery } from "react-responsive";
 import { GithubPermalinkBase, GithubPermalinkBaseProps } from "./GithubPermalinkBase";
 
-type GithubPermalinkProps = Omit<GithubPermalinkBaseProps, "data"> & {permalink: string};
+type GithubPermalinkProps = Omit<GithubPermalinkBaseProps, "data"> & { permalink: string };
 export function GithubPermalink(props: GithubPermalinkProps) {
 
   const { permalink } = props;
@@ -28,7 +27,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
   }
 
 
-  return <GithubPermalinkBase data={data} {...props}/>
+  return <GithubPermalinkBase data={data} {...props} />
 }
 
 

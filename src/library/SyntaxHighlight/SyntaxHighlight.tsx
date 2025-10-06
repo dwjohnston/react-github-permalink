@@ -1,8 +1,10 @@
 "use client";
-import ReactSyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import { github, tomorrowNight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
+import { AvailableLanguagesPrism } from './availableLanguagesPrism';
+import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c';
 
 const noTheme = {
     "hljs": {
@@ -125,10 +127,11 @@ const noTheme = {
 export function SyntaxHighlight(props: {
     text: string;
     startingLineNumber?: number;
-    className?: string; 
+    className?: string;
+    language?: AvailableLanguagesPrism
 }) {
 
-    const { startingLineNumber, text, className } = props;
+    const { startingLineNumber, text, className, language } = props;
 
     const isDarkMode = useMediaQuery({ query: "(prefers-color-scheme: dark)" })
 
@@ -141,6 +144,6 @@ export function SyntaxHighlight(props: {
     }, [])
 
 
-    return <ReactSyntaxHighlighter className={className} style={ready ? isDarkMode ? tomorrowNight : github : noTheme} language="javascript" showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</ReactSyntaxHighlighter>
+    return <SyntaxHighlighter className={className} style={ready ? isDarkMode ? oneDark : oneLight : {}} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</SyntaxHighlighter>
 
 }

@@ -21,6 +21,15 @@ I highly rate the [`vscode-copy-github-permalink` plugin](https://marketplace.vi
 https://codesandbox.io/s/exciting-nova-js5zlk?file=/src/App.js
 
 
+## Language Support
+
+Langauge is naively auto detected based on file extension. See [logic here for all auto-detected languages](https://github.com/dwjohnston/react-github-permalink/pull/73/files#diff-b6feb43e40d6eae1cba733450d691be8f83a1a50ecbff1b890cd343b2039ece1).
+
+If this does not suit you, you can override the autodetected langauage with the `language` prop. 
+
+
+
+
 ## RSC Compatibility / Three modes of operation
 
 This package is compatible with Next 13+ and the components can be used as RSCs if you wish. 
