@@ -2,4 +2,4 @@
 "react-github-permalink": patch
 ---
 
-Fix the highlighting :|
+Make JSX and TSX be detected specifically as JSX and TSX languages. 
