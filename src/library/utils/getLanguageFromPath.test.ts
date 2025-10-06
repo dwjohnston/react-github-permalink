@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { getLanguageFromPath } from './getLanguageFromPath';
 
 describe('getLanguageFromPath', () => {
-    it('should return typescript for .tsx files', () => {
-        expect(getLanguageFromPath('ReactRenders3.tsx')).toBe('typescript');
+    it('should return tsx for .tsx files', () => {
+        expect(getLanguageFromPath('ReactRenders3.tsx')).toBe('tsx');
     });
 
     it('should return typescript for .ts files', () => {
@@ -14,8 +14,8 @@ describe('getLanguageFromPath', () => {
         expect(getLanguageFromPath('script.js')).toBe('javascript');
     });
 
-    it('should return javascript for .jsx files', () => {
-        expect(getLanguageFromPath('component.jsx')).toBe('javascript');
+    it('should return jsx for .jsx files', () => {
+        expect(getLanguageFromPath('component.jsx')).toBe('jsx');
     });
 
     it('should return python for .py files', () => {
@@ -59,11 +59,11 @@ describe('getLanguageFromPath', () => {
     });
 
     it('should handle paths with multiple dots', () => {
-        expect(getLanguageFromPath('src/components/MyComponent.tsx')).toBe('typescript');
+        expect(getLanguageFromPath('src/components/MyComponent.tsx')).toBe('tsx');
     });
 
     it('should handle case insensitive extensions', () => {
-        expect(getLanguageFromPath('Component.TSX')).toBe('typescript');
+        expect(getLanguageFromPath('Component.TSX')).toBe('tsx');
         expect(getLanguageFromPath('Script.JS')).toBe('javascript');
     });
 });

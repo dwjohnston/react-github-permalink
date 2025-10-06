@@ -8,13 +8,15 @@ export function getLanguageFromPath(filePath: string): AvailableLanguagesPrism {
 
     switch (extension) {
         case 'js':
-        case 'jsx':
         case 'mjs':
         case 'cjs':
             return 'javascript';
+        case 'jsx':
+            return 'jsx';
         case 'ts':
-        case 'tsx':
             return 'typescript';
+        case 'tsx':
+            return 'tsx';
         case 'py':
         case 'python':
             return 'python';
