@@ -144,6 +144,6 @@ export function SyntaxHighlight(props: {
     }, [])
 
 
-    return <SyntaxHighlighter className={className} style={ready ? isDarkMode ? oneDark : oneLight : {}} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</SyntaxHighlighter>
+    return <><SyntaxHighlighter className={className} style={ready ? isDarkMode ? oneDark : oneLight : {}} language={language} showLineNumbers={startingLineNumber !== undefined} startingLineNumber={startingLineNumber}>{text}</SyntaxHighlighter></>
 
 }
