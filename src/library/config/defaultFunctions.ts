@@ -6,6 +6,8 @@ import { ErrorResponses } from "./GithubPermalinkContext";
 /**
  * This is AI generated code from GitHub Copilot.
  * See: https://github.com/dwjohnston/react-github-permalink/pull/79
+ * But based on my reading of this:https://stackoverflow.com/a/56647993/1068446
+ * But the suggested answer is using deprecated functions (escape/unescape)
  * 
  * Properly decode base64 string with UTF-8 support.
  * GitHub API returns base64-encoded content that may contain UTF-8 characters like emojis.
@@ -16,7 +18,7 @@ import { ErrorResponses } from "./GithubPermalinkContext";
  * The solution: Convert the binary string to a byte array, then use TextDecoder to properly
  * interpret those bytes as UTF-8.
  */
-function decodeBase64WithUTF8(base64: string): string {
+export function decodeBase64WithUTF8(base64: string): string {
     // Remove whitespace that GitHub API might include
     const cleanedBase64 = base64.replace(/\s/g, '');
 
