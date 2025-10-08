@@ -110,3 +110,36 @@ export const WithLineExclusionsRealCode: Story = {
             />
     ),
 };
+
+const codeWithEmoji = `export function ChildrenStyleOne() {
+    const [value, setValue] = React.useState(0)
+    return <div className="some-parent-component">
+        <strong>ChildrenStyleOne</strong>
+        <p>RenderTracker is directly rendered</p>
+        <button onClick={() => {
+            setValue((prev) => prev + 1);;
+        }}>Increase count: {value}</button>
+        {/* 👇     Here we declare the RenderTracker directly in the component */}
+        <RenderTracker />
+    </div>
+}`;
+
+export const WithEmoji: Story = {
+    render: () => (
+        <GithubPermalinkBase
+            permalink="https://github.com/dwjohnston/react-renders/src/react-renders/ReactRenders3.tsx#L8-L32"
+            data={{
+                lines: codeWithEmoji.split('\n'),
+                lineFrom: 8,
+                lineTo: 19,
+                commit: "b91494b",
+                path: "src/react-renders/ReactRenders3.tsx",
+                owner: "dwjohnston",
+                repo: "react-renders",
+                commitUrl: "https://github.com/dwjohnston/react-renders/commit/b91494b",
+                status: "ok"
+            }} 
+            language="typescript"
+            />
+    ),
+};

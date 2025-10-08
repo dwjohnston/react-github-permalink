@@ -3,6 +3,39 @@ import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParse
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
 
+/**
+ * This is AI generated code from GitHub Copilot.
+ * See: https://github.com/dwjohnston/react-github-permalink/pull/79
+ * But based on my reading of this:https://stackoverflow.com/a/56647993/1068446
+ * But the suggested answer is using deprecated functions (escape/unescape)
+ * 
+ * Properly decode base64 string with UTF-8 support.
+ * GitHub API returns base64-encoded content that may contain UTF-8 characters like emojis.
+ * 
+ * The issue: atob() decodes base64 to a binary string, but treats each byte as a Latin-1 character.
+ * For UTF-8 multi-byte characters (like emojis), this corrupts the data.
+ * 
+ * The solution: Convert the binary string to a byte array, then use TextDecoder to properly
+ * interpret those bytes as UTF-8.
+ */
+export function decodeBase64WithUTF8(base64: string): string {
+    // Remove whitespace that GitHub API might include
+    const cleanedBase64 = base64.replace(/\s/g, '');
+
+    // Decode base64 to binary string (each character represents a byte)
+    const binaryString = atob(cleanedBase64);
+
+    // Convert binary string to byte array
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    // Decode UTF-8 bytes to string
+    const decoder = new TextDecoder('utf-8');
+    return decoder.decode(bytes);
+}
+
 
 export async function defaultGetIssueFn(issueLink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubIssueLinkDataResponse> {
     const config = parseGithubIssueLink(issueLink);
@@ -32,10 +65,10 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         issueState: issueJson.state,
         status: "ok",
         owner: config.owner,
-        repo: config.repo, 
+        repo: config.repo,
         reactions: issueJson.reactions,
     };
-}export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
+} export async function defaultGetPermalinkFn(permalink: string, githubToken?: string, onError?: (err: unknown) => void): Promise<GithubPermalinkDataResponse> {
     const config = parseGithubPermalinkUrl(permalink);
 
 
@@ -61,7 +94,7 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
     }
 
     const [contentJson, commitJson] = await Promise.all([contentResult.json(), commitResult.json()]);
-    const content = atob(contentJson.content);
+    const content = decodeBase64WithUTF8(contentJson.content);
     const lines = content.split("\n");
 
     return {
@@ -76,6 +109,9 @@ export async function defaultGetIssueFn(issueLink: string, githubToken?: string,
         status: "ok"
     };
 }
+
+
+
 export function handleResponse(response: Response): ErrorResponses {
     if (response.status === 404) {
         return { status: "404" };
@@ -87,7 +123,7 @@ export function handleResponse(response: Response): ErrorResponses {
         };
     }
 
-    if(response.status === 401) {
+    if (response.status === 401) {
         return {
             status: "unauthorized"
         }

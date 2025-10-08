@@ -98,6 +98,8 @@
     &>pre {
         /* react-style-highlighter is adding margin via style attribute*/
         margin: 0 !important;
+        /* Ensure emojis render properly by including emoji-capable fonts */
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 
     pre+.hide-line-numbers {
