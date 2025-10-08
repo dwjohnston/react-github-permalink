@@ -4,6 +4,9 @@ import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
 
 /**
+ * This is AI generated code from GitHub Copilot.
+ * See: https://github.com/dwjohnston/react-github-permalink/pull/79
+ * 
  * Properly decode base64 string with UTF-8 support.
  * GitHub API returns base64-encoded content that may contain UTF-8 characters like emojis.
  * 
@@ -16,16 +19,16 @@ import { ErrorResponses } from "./GithubPermalinkContext";
 function decodeBase64WithUTF8(base64: string): string {
     // Remove whitespace that GitHub API might include
     const cleanedBase64 = base64.replace(/\s/g, '');
-    
+
     // Decode base64 to binary string (each character represents a byte)
     const binaryString = atob(cleanedBase64);
-    
+
     // Convert binary string to byte array
     const bytes = new Uint8Array(binaryString.length);
     for (let i = 0; i < binaryString.length; i++) {
         bytes[i] = binaryString.charCodeAt(i);
     }
-    
+
     // Decode UTF-8 bytes to string
     const decoder = new TextDecoder('utf-8');
     return decoder.decode(bytes);
