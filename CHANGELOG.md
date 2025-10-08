@@ -1,5 +1,12 @@
 # react-github-permalink
 
+## 1.11.1
+
+### Patch Changes
+
+- 76b5037: Make JSX and TSX be detected specifically as JSX and TSX languages.
+- c717b2f: Fix emoji rendering in code blocks with UTF-8 decoding
+
 ## 1.11.0
 
 ### Minor Changes
