@@ -1,7 +1,9 @@
 import { GithubIssueLinkDataResponse } from "./GithubPermalinkContext";
-import { parseGithubIssueLink, parseGithubPermalinkUrl } from "../utils/urlParsers";
+import { parseGithubIssueLink, parseGithubPermalinkUrl, parseTypeScriptPlaygroundUrl } from "../utils/urlParsers";
 import { GithubPermalinkDataResponse } from "./GithubPermalinkContext";
 import { ErrorResponses } from "./GithubPermalinkContext";
+import { TypeScriptPlaygroundDataResponse } from "./GithubPermalinkContext";
+import * as LZString from "lz-string";
 
 /**
  * This is AI generated code from GitHub Copilot.
@@ -133,3 +135,31 @@ export function handleResponse(response: Response): ErrorResponses {
     };
 }
 
+export async function defaultGetTypeScriptPlaygroundFn(playgroundUrl: string, _githubToken?: string, onError?: (err: unknown) => void): Promise<TypeScriptPlaygroundDataResponse> {
+    try {
+        const config = parseTypeScriptPlaygroundUrl(playgroundUrl);
+        
+        // Decompress the code using lz-string
+        const decodedCode = LZString.decompressFromEncodedURIComponent(config.code);
+        
+        if (!decodedCode) {
+            onError?.("Failed to decompress TypeScript playground code");
+            return { status: "other-error" };
+        }
+        
+        // Split the code into lines
+        const lines = decodedCode.split("\n");
+        
+        return {
+            lines,
+            startLine: config.startLine,
+            startColumn: config.startColumn,
+            endLine: config.endLine,
+            endColumn: config.endColumn,
+            status: "ok"
+        };
+    } catch (error) {
+        onError?.(error);
+        return { status: "other-error" };
+    }
+}

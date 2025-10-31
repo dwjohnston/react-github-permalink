@@ -36,3 +36,46 @@ export function parseGithubIssueLink(url: string): { owner: string, repo: string
         throw new Error("Invalid issue link URL");    
     }
 }
+
+export type TypeScriptPlaygroundUrlInfo = {
+    code: string;
+    startLine?: number;
+    startColumn?: number;
+    endLine?: number;
+    endColumn?: number;
+};
+
+export function parseTypeScriptPlaygroundUrl(playgroundUrl: string): TypeScriptPlaygroundUrlInfo {
+    // TypeScript playground URL format:
+    // https://www.typescriptlang.org/play/?ssl=44&ssc=1&pln=8&pc=1#code/{compressed_code}
+    
+    const url = new URL(playgroundUrl);
+    
+    // Validate it's a TypeScript playground URL
+    if (!url.hostname.includes('typescriptlang.org') || !url.pathname.includes('/play')) {
+        throw new Error("Invalid TypeScript playground URL");
+    }
+    
+    // Extract code from hash
+    const codeMatch = url.hash.match(/#code\/(.*)/);
+    if (!codeMatch) {
+        throw new Error("No code found in TypeScript playground URL");
+    }
+    
+    const compressedCode = codeMatch[1];
+    
+    // Parse query parameters for line/column information
+    const params = new URLSearchParams(url.search);
+    const ssl = params.get('ssl'); // start line
+    const ssc = params.get('ssc'); // start column
+    const pln = params.get('pln'); // panel line (end line)
+    const pc = params.get('pc');   // panel column (end column)
+    
+    return {
+        code: compressedCode,
+        startLine: ssl ? parseInt(ssl, 10) : undefined,
+        startColumn: ssc ? parseInt(ssc, 10) : undefined,
+        endLine: pln ? parseInt(pln, 10) : undefined,
+        endColumn: pc ? parseInt(pc, 10) : undefined,
+    };
+}
