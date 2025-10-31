@@ -3,6 +3,7 @@ import { PropsWithChildren, createContext } from "react";
 import { BaseConfiguration } from "./BaseConfiguration";
 import { defaultGetIssueFn } from "./defaultFunctions";
 import { defaultGetPermalinkFn } from "./defaultFunctions";
+import { defaultGetTypeScriptPlaygroundFn } from "./defaultFunctions";
 
 // Thanks ChatGPT
 export type GithubPermalinkUrlInfo = {
@@ -56,6 +57,17 @@ export type GithubIssueLinkDataResponse = {
     }
 } | ErrorResponses;
 
+export type TypeScriptPlaygroundSuccessData = {
+    lines: Array<string>;
+    startLine?: number;
+    startColumn?: number;
+    endLine?: number;
+    endColumn?: number;
+    status: "ok";
+}
+
+export type TypeScriptPlaygroundDataResponse = TypeScriptPlaygroundSuccessData | ErrorResponses;
+
 
 
 
@@ -63,12 +75,14 @@ export type GithubIssueLinkDataResponse = {
 export const GithubPermalinkContext = createContext<BaseConfiguration>({
     getDataFn: defaultGetPermalinkFn,
     getIssueFn: defaultGetIssueFn,
+    getTypeScriptPlaygroundFn: defaultGetTypeScriptPlaygroundFn,
 });
 
 export function GithubPermalinkProvider(props: PropsWithChildren<Partial<BaseConfiguration>>) {
     return <GithubPermalinkContext.Provider value={{
         getDataFn: props.getDataFn ?? defaultGetPermalinkFn,
         getIssueFn: props.getIssueFn ?? defaultGetIssueFn,
+        getTypeScriptPlaygroundFn: props.getTypeScriptPlaygroundFn ?? defaultGetTypeScriptPlaygroundFn,
         githubToken: props.githubToken,
         onError: props.onError,
     }}>
