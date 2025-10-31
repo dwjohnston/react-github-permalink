@@ -20,7 +20,7 @@ export const Primary: Story = {
 
 export const SimpleCode: Story = {
   render: () => (
-    <TypeScriptPlayground playgroundUrl="https://www.typescriptlang.org/play/#code/PTAEAEFMCdoe2gZwFygEwGYAsBWAUAJYB2ALgKYBG0A7AC4CeADgE4mgA0oA3pKKK2JACUQgL5A" />
+    <TypeScriptPlayground playgroundUrl="https://www.typescriptlang.org/play/#code/MYewdgzgLgBAtgUwhAhgcwQLhtATgSzDRgF4YByACQQBsaQAaGAFQE8AHBAZWAPagCE5ANwAoUJBA0EAOnpoAFImToEASmFA" />
   ),
 };
 
