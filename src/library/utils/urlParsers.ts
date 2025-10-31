@@ -52,7 +52,7 @@ export function parseTypeScriptPlaygroundUrl(playgroundUrl: string): TypeScriptP
     const url = new URL(playgroundUrl);
     
     // Validate it's a TypeScript playground URL
-    if (!url.hostname.includes('typescriptlang.org') || !url.pathname.includes('/play')) {
+    if ((url.hostname !== 'www.typescriptlang.org' && url.hostname !== 'typescriptlang.org') || !url.pathname.includes('/play')) {
         throw new Error("Invalid TypeScript playground URL");
     }
     

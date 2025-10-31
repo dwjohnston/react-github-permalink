@@ -24,7 +24,7 @@ export function TypeScriptPlaygroundBase(props: TypeScriptPlaygroundBaseProps) {
         
         return <TypeScriptPlaygroundInner {...props} clipboard={clipboard} header={<>
             <a href={playgroundUrl} className="file-link">TypeScript Playground</a>
-            {data.startLine && data.endLine && (
+            {data.startLine != null && data.endLine != null && (
                 <p>Lines {data.startLine} to {data.endLine}</p>
             )}
         </>}>

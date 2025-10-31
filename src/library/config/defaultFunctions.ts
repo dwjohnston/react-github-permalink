@@ -143,7 +143,8 @@ export async function defaultGetTypeScriptPlaygroundFn(playgroundUrl: string, _g
         const decodedCode = LZString.decompressFromEncodedURIComponent(config.code);
         
         if (!decodedCode) {
-            onError?.("Failed to decompress TypeScript playground code");
+            const error = "Failed to decompress TypeScript playground code: invalid or corrupted data";
+            onError?.(error);
             return { status: "other-error" };
         }
         
