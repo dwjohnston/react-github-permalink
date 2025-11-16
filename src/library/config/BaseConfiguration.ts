@@ -24,6 +24,13 @@ export type BaseConfiguration = {
      * @returns 
      */
     onError?: (e: unknown) => void;
+
+    /**
+     * Default value for whether GitHub permalinks should be initially expanded.
+     * When false, permalinks will be collapsed by default showing only the code block.
+     * Default: true
+     */
+    initiallyExpandGithubPermalinks?: boolean;
 };
 
 

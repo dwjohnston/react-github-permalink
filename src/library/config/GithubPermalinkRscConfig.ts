@@ -30,6 +30,10 @@ class GithubPermalinkRscConfig {
   public getOnError() {
     return this.baseConfiguration.onError;
   }
+
+  public getInitiallyExpandGithubPermalinks() {
+    return this.baseConfiguration.initiallyExpandGithubPermalinks ?? true;
+  }
 }
 
 export const githubPermalinkRscConfig = new GithubPermalinkRscConfig();
