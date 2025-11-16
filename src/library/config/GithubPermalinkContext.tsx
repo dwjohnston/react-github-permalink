@@ -63,6 +63,7 @@ export type GithubIssueLinkDataResponse = {
 export const GithubPermalinkContext = createContext<BaseConfiguration>({
     getDataFn: defaultGetPermalinkFn,
     getIssueFn: defaultGetIssueFn,
+    initiallyExpandGithubPermalinks: true,
 });
 
 export function GithubPermalinkProvider(props: PropsWithChildren<Partial<BaseConfiguration>>) {
@@ -71,6 +72,7 @@ export function GithubPermalinkProvider(props: PropsWithChildren<Partial<BaseCon
         getIssueFn: props.getIssueFn ?? defaultGetIssueFn,
         githubToken: props.githubToken,
         onError: props.onError,
+        initiallyExpandGithubPermalinks: props.initiallyExpandGithubPermalinks ?? true,
     }}>
         {props.children}
     </GithubPermalinkContext.Provider>

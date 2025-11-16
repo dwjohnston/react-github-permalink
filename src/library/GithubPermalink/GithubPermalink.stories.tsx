@@ -117,3 +117,33 @@ export const SingleLine: Story = {
     <GithubPermalink permalink="https://github.com/dwjohnston/blacksheepcode/blob/72ee472bfa896df255ae42ef017ad0cca96b2333/app/components/PostComments/PostComments.tsx#L28" />
   ),
 };
+
+export const InitiallyCollapsed: Story = {
+  render: () => (
+    <div>
+      <p>This permalink starts collapsed (minimal variant):</p>
+      <GithubPermalink 
+        permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5" 
+        isInitiallyExpanded={false}
+      />
+      <p>This permalink starts expanded (default):</p>
+      <GithubPermalink 
+        permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5" 
+        isInitiallyExpanded={true}
+      />
+    </div>
+  ),
+};
+
+export const GlobalConfigCollapsed: Story = {
+  render: () => (
+    <div>
+      <p>Using global configuration to set default to collapsed:</p>
+      <GithubPermalinkProvider initiallyExpandGithubPermalinks={false}>
+        <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/5b15aa07e60af4e317086f391b28cadf9aae8e1b/sample_files/sample1.go#L1-L5" />
+        <p style={{ marginTop: '1em' }}>Second permalink also collapsed by default:</p>
+        <GithubPermalink permalink="https://github.com/dwjohnston/react-github-permalink/blob/bc75e8fe2d1c0395c9443afe1837f453c05a7698/sample_files/sample1.js#L3-L17" />
+      </GithubPermalinkProvider>
+    </div>
+  ),
+};

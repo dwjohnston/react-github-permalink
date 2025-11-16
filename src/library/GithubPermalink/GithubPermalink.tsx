@@ -9,7 +9,7 @@ export function GithubPermalink(props: GithubPermalinkProps) {
 
   const { permalink } = props;
   const [data, setData] = useState(null as null | GithubPermalinkDataResponse)
-  const { getDataFn, githubToken, onError } = useContext(GithubPermalinkContext);
+  const { getDataFn, githubToken, onError, initiallyExpandGithubPermalinks } = useContext(GithubPermalinkContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,10 @@ export function GithubPermalink(props: GithubPermalinkProps) {
   }
 
 
-  return <GithubPermalinkBase data={data} {...props} />
+  return <GithubPermalinkBase 
+    data={data} 
+    isInitiallyExpanded={props.isInitiallyExpanded ?? initiallyExpandGithubPermalinks}
+    {...props} />
 }
 
 
